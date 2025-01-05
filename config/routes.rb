@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { registrations: "users/registrations" }
+  ActiveAdmin.routes(self)
 
+  authenticate :user, ->(u) { u.sys_admin? } do
+    mount Flipper::UI.app(Flipper) => "/admin/feature-flags"
+    mount MissionControl::Jobs::Engine, at: "/admin/mission_control/jobs"
+  end
+  
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
@@ -11,4 +17,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root to: 'pages#home'
 end

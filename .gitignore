@@ -7,8 +7,18 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore all environment files.
-/.env*
+# Ignore all .env files by default
+.env*
+
+# Allow specific environment files
+!/.env.development
+!/.env.test
+!/.env.example
+
+# Ignore local environment overrides
+.env.local
+.env.development.local
+.env.test.local
 
 # Ignore all logfiles and tempfiles.
 /log/*

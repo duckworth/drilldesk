@@ -63,3 +63,19 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Addons
+gem "devise"
+gem "show_for"
+gem "friendly_id"
+gem "has_scope"
+gem "pagy"
+gem "dotenv", groups: [ :development, :test ]
+gem "activeadmin", ">= 4.0.0.beta15"
+gem "local_time"
+gem "truemail"
+gem "flipper"
+gem "flipper-active_record"
+gem "flipper-ui"
+gem "mission_control-jobs"
+gem "active_model_validates_intersection_of"

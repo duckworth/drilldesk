@@ -1,0 +1,21 @@
+<div id="flash">
+  <% if flash.any? %>
+    <div class="flash-messages mb-2">
+      <% flash.each do |key, message| %>
+        <% Rails.logger.debug "Flash: #{key} - #{message}" %>
+        <% css_class = case key.to_sym
+                       when :error then "alert-error"
+                       when :notice then "alert-success"
+                       when :alert then "alert-error"
+                       when :info then "alert-info"
+                       when :warning then "alert-warning"
+                       when :success then "alert-success"
+                       else "alert-success"
+                       end %>
+        <div role="alert" class="alert <%= css_class %>">
+          <span><%= message %></span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

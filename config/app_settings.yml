@@ -1,0 +1,18 @@
+default: &default
+  mailer_sender: "no-reply@example.com"
+  comment_host: "localhost:8080"
+  app_host: "localhost:3000"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  app_host: <%= ENV["APP_HOST"] || "drilldesk.com" %>
+  smtp_address: <%= ENV["SMTP_ADDRESS"] %>
+  smtp_username: <%= ENV["SMTP_USERNAME"] %>
+  smtp_password: <%= ENV["SMTP_PASSWORD"] %>
+  mailer_sender: <%= "no-reply@#{ENV.fetch("APP_HOST","drilldesk.com")}" %>
