@@ -13,10 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Extract Ruby Version
+        run: echo "ruby-version=$(grep '^ruby ' .tool-versions | cut -d' ' -f2)" >> $GITHUB_ENV
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          ruby-version: ${{ env.ruby-version }}
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
@@ -66,10 +69,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Extract Ruby Version
+        run: echo "ruby-version=$(grep '^ruby ' .tool-versions | cut -d' ' -f2)" >> $GITHUB_ENV
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
+          ruby-version: ${{ env.ruby-version }}
           bundler-cache: true
 
       - name: Run tests

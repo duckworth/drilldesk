@@ -79,3 +79,4 @@ gem "flipper-active_record"
 gem "flipper-ui"
 gem "mission_control-jobs"
 gem "active_model_validates_intersection_of"
+gem "rubyzip", "=2.4.rc1" # temp issue with rubyzip 2.4 https://github.com/rubyzip/rubyzip/issues/623
