@@ -6,6 +6,11 @@ module.exports = {
     './app/javascript/**/*.js',
     './node_modules/flowbite/**/*.js'
   ],
+  safelist: [
+    {
+      pattern: /^btn(-[a-zA-Z0-9]*)?$/,
+    },
+  ],
   plugins: [
     require('flowbite/plugin'),
     require('flowbite-typography')

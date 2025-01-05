@@ -31,5 +31,8 @@ module Drilldesk
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+    config.after_initialize do
+      ActionView::Base.default_form_builder = TailwindFormBuilder
+    end
   end
 end

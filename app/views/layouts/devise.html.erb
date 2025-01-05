@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html class="h-full bg-base" lang="en">
+<html lang="en">
 <head>
   <%= render "layouts/head" %>
 </head>
-<body>
-        <%= render "shared/flash" %>
-        <%= yield %>
+<body class="h-full">
+<div class="h-full antialiased bg-gray-50 dark:bg-gray-900">
+  <main class="p-4 h-auto pt-20 min-h-screen">
+    <% unless content_for?(:custom_flash_rendered) %>
+      <%= render "shared/flash" %> <!-- Fallback: Render flash only if not already defined -->
+    <% end %>
+    <%= yield %>
+  </main>
+</div>
 </body>
 </html>
