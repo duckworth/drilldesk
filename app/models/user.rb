@@ -2,7 +2,7 @@ class User < ApplicationRecord
   include User::Roles
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :lockable, 
+  devise :database_authenticatable, :lockable,
          :recoverable, :rememberable, :validatable, :confirmable,
          authentication_keys: [ :email ]
 
@@ -19,4 +19,3 @@ class User < ApplicationRecord
     find_by(email: email)
   end
 end
-
