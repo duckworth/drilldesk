@@ -9,20 +9,22 @@ if (
   localStorage.getItem(THEME_KEY) === "dark" ||
   (!localStorage.getItem(THEME_KEY) && window.matchMedia("(prefers-color-scheme: dark)").matches)
 ) {
-  themeToggleLightIcon.classList.remove("hidden");
+  themeToggleLightIcon?.classList.remove("hidden");
 } else {
-  themeToggleDarkIcon.classList.remove("hidden");
+  themeToggleDarkIcon?.classList.remove("hidden");
 }
 
 // Add click event listener to toggle dark mode
+if (themeToggleBtn) {
 themeToggleBtn.addEventListener("click", () => {
   // Toggle icons
-  themeToggleDarkIcon.classList.toggle("hidden");
-  themeToggleLightIcon.classList.toggle("hidden");
+    themeToggleDarkIcon?.classList.toggle("hidden");
+    themeToggleLightIcon?.classList.toggle("hidden");
 
   // Call the shared toggle logic
   toggleDarkMode();
 });
+}
 
 // Apply dark mode on page load
 document.addEventListener("DOMContentLoaded", applyDarkMode);
