@@ -14,7 +14,7 @@ class User < ApplicationRecord
   validates :email, email: true, unless: ->(u) { u.skip_valid_email }
 
   def name
-    [first_name, last_name].compact.join(" ")
+    [ first_name, last_name ].compact.join(" ")
   end
 
   def self.find_for_database_authentication(warden_conditions)

@@ -278,6 +278,7 @@ CREATE UNIQUE INDEX index_users_on_unlock_token ON public.users USING btree (unl
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250105234619'),
 ('20250105123213'),
 ('20250105122653'),
 ('20250105121118');

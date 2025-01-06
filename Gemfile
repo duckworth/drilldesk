@@ -22,6 +22,7 @@ gem "thruster", require: false
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
+  gem "letter_opener"
   gem "rubocop-rails-omakase", require: false
 end
 
@@ -40,7 +41,7 @@ gem "show_for"
 gem "friendly_id"
 gem "has_scope"
 gem "pagy"
-gem "dotenv", groups: [:development, :test]
+gem "dotenv", groups: [ :development, :test ]
 gem "activeadmin", ">= 4.0.0.beta15"
 gem "local_time"
 gem "truemail"

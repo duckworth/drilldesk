@@ -2,14 +2,19 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::TagHelper
   include TailwindFormClasses
 
-  def initialize(...)
+  def  initialize(object_name, object, template, options)
     @tailwind_class_builder = TailwindClassBuilder.new
-    super
+    default_classes = "space-y-4 md:space-y-6"
+
+    # Merge default classes with any classes provided in options
+    options[:html] ||= {}
+    options[:html][:class] = [ default_classes, options[:html][:class] ].compact.join(" ")
+    super(object_name, object, template, options)
   end
 
   # Same list of dynamically-generated field helpers as in Rails:
   #   actionview/lib/action_view/helpers/form_helper.rb
-  [:text_field,
+  [ :text_field,
    :password_field,
    :text_area,
    :color_field,
@@ -26,7 +31,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
    :email_field,
    :number_field,
    :range_field,
-   :file_field].each do |field_method|
+   :file_field ].each do |field_method|
     class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1
           def #{field_method}(method, options = {})
             if options.delete(:tailwindified)
@@ -102,12 +107,12 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
 
     label = tailwind_label(method, custom_opts[:label], html_options)
 
-    [label, { class: class_names(
+    [ label, { class: class_names(
       "mt-1 rounded-md shadow-sm focus:ring focus:ring-success focus:ring-opacity-50",
       { custom_opts[:field_classes] => custom_opts[:field_classes].present? },
       ("block w-full" unless custom_opts[:inline]),
       border_color_classes(method)
-    ) }.merge(html_opts)]
+    ) }.merge(html_opts) ]
   end
 
   def select(method, choices = nil, options = {}, html_options = {}, &)
@@ -161,7 +166,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     field = send(field_method, object_method, {
       class: class_names(
         text_like_field_classes,
-        {custom_opts[:field_classes] => custom_opts[:field_classes].present?},
+        { custom_opts[:field_classes] => custom_opts[:field_classes].present? },
         ("mt-1 block w-full" unless custom_opts[:inline]),
         border_color_classes(object_method)
       ),
@@ -183,13 +188,13 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  CUSTOM_OPTS = [:inline, :label, :field_classes, :wrapper_classes].freeze
+  CUSTOM_OPTS = [ :inline, :label, :field_classes, :wrapper_classes ].freeze
 
   def partition_custom_opts(opts)
     (opts || {}).partition { |k, v| CUSTOM_OPTS.include?(k) }.map(&:to_h)
   end
 
-  CUSTOM_LABEL_OPTS = [:text, :class, :inline, :extra_classes, :hidden, :skip]
+  CUSTOM_LABEL_OPTS = [ :text, :class, :inline, :extra_classes, :hidden, :skip ]
 
   def partition_custom_label_opts(opts)
     (opts || {}).partition { |k, v| CUSTOM_LABEL_OPTS.include?(k) }.map(&:to_h)
@@ -215,4 +220,3 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     "#{classes} #{field_classes} #{border_color_classes(method)}"
   end
 end
-
