@@ -2,12 +2,12 @@ namespace :icon do
   require "net/http"
   require "json"
 
-  desc "Fetch an iconify icon and save it as partial  bin/rails icon:fetch ICON=heroicons:light-bulb-20-solid"
+  desc "Fetch an iconify icon and save it as partial `bin/rails icon:fetch ICON=heroicons:light-bulb`"
   task fetch: :environment do
     icon_name = ENV["ICON"]
 
     if icon_name.nil? || icon_name.strip.empty?
-      puts "ERROR: Please provide an icon name using the ICON environment variable (e.g., bin/rails icon:fetch ICON=heroicons:light-bulb-20-solid)"
+      puts "ERROR: Please provide an icon name using the ICON environment variable (e.g., bin/rails icon:fetch ICON=heroicons:light-bulb)"
       exit 1
     end
 
