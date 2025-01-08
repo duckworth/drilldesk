@@ -1,30 +1,42 @@
 import { applyDarkMode, toggleDarkMode, THEME_KEY } from "./dark_mode_lib";
 
-var themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
-var themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
-var themeToggleBtn = document.getElementById("theme-toggle");
+// We will initialize these variables inside the event handler:
+let themeToggleDarkIcon, themeToggleLightIcon, themeToggleBtn;
 
-// Change the icons inside the button based on previous settings
-if (
-  localStorage.getItem(THEME_KEY) === "dark" ||
-  (!localStorage.getItem(THEME_KEY) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-) {
-  themeToggleLightIcon?.classList.remove("hidden");
-} else {
-  themeToggleDarkIcon?.classList.remove("hidden");
-}
+// Run whenever Turbo renders or loads a new page
+document.addEventListener("turbo:load", () => {
+  // Apply the correct mode based on localStorage or prefers-color-scheme
+  applyDarkMode();
 
-// Add click event listener to toggle dark mode
-if (themeToggleBtn) {
-themeToggleBtn.addEventListener("click", () => {
-  // Toggle icons
-    themeToggleDarkIcon?.classList.toggle("hidden");
-    themeToggleLightIcon?.classList.toggle("hidden");
+  // Grab your elements again (they may be replaced by Turbo)
+  themeToggleDarkIcon = document.getElementById("theme-toggle-dark-icon");
+  themeToggleLightIcon = document.getElementById("theme-toggle-light-icon");
+  themeToggleBtn = document.getElementById("theme-toggle");
 
-  // Call the shared toggle logic
-  toggleDarkMode();
+  // Reset the icons’ visibility
+  if (
+    localStorage.getItem(THEME_KEY) === "dark" ||
+    (
+      !localStorage.getItem(THEME_KEY) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    )
+  ) {
+    themeToggleLightIcon?.classList.remove("hidden");
+    themeToggleDarkIcon?.classList.add("hidden");
+  } else {
+    themeToggleDarkIcon?.classList.remove("hidden");
+    themeToggleLightIcon?.classList.add("hidden");
+  }
+
+  // Re-attach the click listener to the toggle button
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+      // Toggle the icons
+      themeToggleDarkIcon?.classList.toggle("hidden");
+      themeToggleLightIcon?.classList.toggle("hidden");
+
+      // Actually toggle dark mode in localStorage and documentElement
+      toggleDarkMode();
+    });
+  }
 });
-}
-
-// Apply dark mode on page load
-document.addEventListener("DOMContentLoaded", applyDarkMode);

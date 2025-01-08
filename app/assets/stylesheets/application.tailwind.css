@@ -68,4 +68,6 @@
     .error_messages {
         @apply mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 dark:bg-red-900 dark:text-red-200 rounded-lg
     }
+    /*.form-container*/
+    /*.form-group*/
 }

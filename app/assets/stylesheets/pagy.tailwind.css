@@ -1,21 +1,47 @@
+/* pagy.tailwind.css */
+
 .pagy {
-  @apply flex space-x-1 font-semibold text-sm text-gray-500;
-  a:not(.gap) {
-    @apply block rounded-lg px-3 py-1 bg-gray-200;
-    &:hover {
-      @apply bg-gray-300;
-    }
-    &:not([href]) { /* disabled links */
-      @apply text-gray-300 bg-gray-100 cursor-default;
-    }
-    &.current {
-      @apply text-white bg-gray-400;
-    }
+  @apply flex items-center -space-x-px h-10 text-base;
+}
+
+.pagy a:not(.gap) {
+  @apply flex items-center justify-center px-4 h-10 leading-tight
+  text-gray-500 bg-white border border-gray-300
+  hover:bg-gray-100 hover:text-gray-700
+  dark:bg-gray-800 dark:border-gray-700
+  dark:text-gray-400 dark:hover:bg-gray-700
+  dark:hover:text-white cursor-pointer;
+
+  &:first-child {
+    @apply rounded-s-lg border-e-0;
   }
-  label {
-    @apply inline-block whitespace-nowrap bg-gray-200 rounded-lg px-3 py-0.5;
-    input {
-      @apply bg-gray-100 border-none rounded-md;
-    }
+  &:last-child {
+    @apply rounded-e-lg;
   }
+
+  &.current[aria-current="page"] {
+    @apply z-10 text-blue-600 border border-blue-300 bg-blue-50
+    dark:border-gray-700 dark:bg-gray-700 dark:text-white;
+    /* Disable hover by preventing pointer events */
+    @apply pointer-events-none;
+  }
+}
+
+/* Disabled links: maintain consistent appearance on hover */
+.pagy a:not([href]) {
+  @apply text-gray-300 bg-gray-100 cursor-default;
+}
+
+/* Override hover for disabled links so they don't change appearance */
+.pagy a:not([href]):hover {
+  @apply text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-400;
+}
+
+.pagy label {
+  @apply inline-block whitespace-nowrap bg-gray-200
+  rounded-lg px-3 py-0.5;
+}
+
+.pagy label input {
+  @apply bg-gray-100 border-none rounded-md;
 }

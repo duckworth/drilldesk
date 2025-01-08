@@ -21,7 +21,10 @@ gem "thruster", require: false
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "dotenv"
   gem "brakeman", require: false
+  gem "fabrication"
+  gem "faker"
   gem "letter_opener"
   gem "rubocop-rails-omakase", require: false
 end
@@ -36,18 +39,20 @@ group :test do
 end
 
 # Addons
-gem "devise"
-gem "show_for"
-gem "friendly_id"
-gem "has_scope"
-gem "pagy"
-gem "dotenv", groups: [ :development, :test ]
+gem "aasm"
+gem "active_model_validates_intersection_of"
 gem "activeadmin", ">= 4.0.0.beta15"
-gem "local_time"
-gem "truemail"
+gem "acts_as_tenant"
+gem "devise"
 gem "flipper"
 gem "flipper-active_record"
 gem "flipper-ui"
+gem "friendly_id"
+gem "has_scope"
+gem "local_time"
 gem "mission_control-jobs"
-gem "active_model_validates_intersection_of"
+gem "pagy"
+# gem "paper_trail" # todo
 gem "rubyzip"
+gem "show_for"
+gem "truemail"

@@ -10,7 +10,9 @@ module.exports = {
     {
       pattern: /^btn(-[a-zA-Z0-9]*)?$/,
     },
-    "sidebar*"
+    "sidebar*",
+    'pagy*',
+    'pagy',
   ],
   plugins: [
     require('flowbite/plugin'),

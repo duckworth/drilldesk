@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include Pagy::Frontend
   def icon(icon_path, **options)
     render "shared/icons/#{icon_path}", **options
   end
