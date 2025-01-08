@@ -13,7 +13,7 @@ namespace :icon do
 
     set_name = icon_name.split(":").first
     icon_name = icon_name.split(":").last
-    destination_dir = Rails.root.join("app", "views", "shared", "icons", set_name)
+    destination_dir = Rails.root.join("app", "views", "shared", "icons", set_name.underscore)
     destination_file = destination_dir.join("_#{icon_name.underscore}.html.erb")
 
     begin
