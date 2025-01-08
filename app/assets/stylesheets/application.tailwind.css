@@ -65,4 +65,7 @@
     .sidebar_link_active {
         @apply flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white bg-gray-200 dark:bg-gray-750 hover:bg-gray-100 dark:hover:bg-gray-700
     }
+    .error_messages {
+        @apply mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 dark:bg-red-900 dark:text-red-200 rounded-lg
+    }
 }
