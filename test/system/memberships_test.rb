@@ -2,7 +2,9 @@ require "application_system_test_case"
 
 class MembershipsTest < ApplicationSystemTestCase
   setup do
-    @membership = memberships(:one)
+    @membership = Fabricate(:membership)
+    @user = @membership.user
+    sign_in @user
   end
 
   def test_visiting_index
