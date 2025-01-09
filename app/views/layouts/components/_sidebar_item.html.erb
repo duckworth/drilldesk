@@ -1,6 +1,6 @@
 <%# locals: (name:, path:, icon_path: nil, active: false) -%>
 <li>
-  <a href="<%= path %>" class="<%= active ? 'sidebar_link_active' : 'sidebar_link' %> group">
+  <a href="<%= path %>" class="<%= active ? 'sidebar-link-active' : 'sidebar-link' %> group">
     <% if icon_path.present? %>
       <%= icon icon_path, classes: sidebar_icon_classes(active) %>
     <% end %>

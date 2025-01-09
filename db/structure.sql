@@ -116,6 +116,19 @@ CREATE TABLE public.schema_migrations (
 
 
 --
+-- Name: teams; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.teams (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name character varying,
+    slug character varying,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -201,6 +214,14 @@ ALTER TABLE ONLY public.schema_migrations
 
 
 --
+-- Name: teams teams_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.teams
+    ADD CONSTRAINT teams_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -278,6 +299,7 @@ CREATE UNIQUE INDEX index_users_on_unlock_token ON public.users USING btree (unl
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250108200145'),
 ('20250105234619'),
 ('20250105123213'),
 ('20250105122653'),

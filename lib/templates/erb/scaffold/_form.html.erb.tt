@@ -1,0 +1,36 @@
+<%%= form_with(model: <%= model_resource_name %>) do |form| %>
+	<div class="form-container">
+		<%% if <%= singular_table_name %>.errors.any? %>
+		<div class="error-messages">
+			<h2><%%= pluralize(<%= singular_table_name %>.errors.count, "error") %> prohibited this <%= singular_table_name %>
+				from being saved:</h2>
+
+			<ul>
+				<%% <%= singular_table_name %>.errors.each do |error| %>
+				<li><%%= error.full_message %></li>
+				<%% end %>
+			</ul>
+		</div>
+		<%% end %>
+
+	<% attributes.each do |attribute| -%>
+	<div class="form-group">
+		<% if attribute.password_digest? -%>
+			<%%= form.password_field :password %>
+</div>
+
+	<div>
+		<%%= form.password_field :password_confirmation %>
+		<% elsif attribute.attachments? -%>
+		<%%= form.<%= attribute.field_type %> :<%= attribute.column_name %>, multiple: true %>
+		<% else -%>
+		<%%= form.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+		<% end -%>
+</div>
+
+	<% end -%>
+	<div class="actions">
+	    <%%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<%% end %>

@@ -26,6 +26,7 @@ group :development, :test do
   gem "fabrication"
   gem "faker"
   gem "letter_opener"
+  gem "minitest-rails", "~> 8.0.0"
   gem "rubocop-rails-omakase", require: false
 end
 

@@ -30,9 +30,11 @@ module Drilldesk
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
-      g.fixture_replacement :fabrication
+      g.test_framework :minitest, spec: false, fixture_replacement: :fabrication
+      g.fixture_replacement :fabrication, dir: "test/fabricators"
       g.jbuilder false
     end
+    config.app_generators.scaffold_controller = :scaffold_controller
     config.after_initialize do
       ActionView::Base.default_form_builder = TailwindFormBuilder
     end

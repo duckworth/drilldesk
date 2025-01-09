@@ -1,0 +1,20 @@
+<%% content_for :title, "<%= human_name.pluralize %>" %>
+
+<h1 class="page-heading"><%= human_name.pluralize %></h1>
+
+<div class="items-list" id="<%= plural_table_name %>">
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <div class="item-container">
+    <%%= render <%= singular_table_name %> %>
+    <div class="item-actions">
+      <%%= link_to "Show this <%= human_name.downcase %>", <%= model_resource_name(singular_table_name) %>, class: 'link' %>
+    </div>
+  </div>
+  <%% end %>
+</div>
+<div class="pagination">
+  <%%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%%= link_to "New <%= human_name.downcase %>", <%= new_helper(type: :path) %>, class: 'btn btn-primary' %>
+</div>

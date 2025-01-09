@@ -1,9 +1,13 @@
 /* pagy.tailwind.css */
-
-.pagy {
-  @apply flex items-center -space-x-px h-10 text-base;
+.pagination {
+  @apply mt-4;
 }
-
+.pagy {
+  @apply flex items-center -space-x-px h-auto text-base;
+}
+.pagy.nav {
+  @apply mb-2; /* Adds margin-bottom for separation */
+}
 .pagy a:not(.gap) {
   @apply flex items-center justify-center px-4 h-10 leading-tight
   text-gray-500 bg-white border border-gray-300

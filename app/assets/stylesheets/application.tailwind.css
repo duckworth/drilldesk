@@ -14,7 +14,7 @@
     .btn-primary {
         @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
     }
-    .btn-alternative {
+    .btn-alt {
         @apply text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700;
     }
     .btn-dark {
@@ -52,22 +52,57 @@
     .btn-xl {
         @apply px-6 py-3.5 text-base;
     }
+    
+    .link {
+        @apply font-medium text-blue-600 dark:text-blue-500 hover:underline
+    }
     /* icons */
-    .base_icon {
+    .base-icon {
         @apply text-gray-500 dark:text-gray-400;
     }
-    .sidebar_icon {
+    .sidebar-icon {
         @apply transition duration-75 group-hover:text-gray-900 dark:group-hover:text-white;
     }
-    .sidebar_link {
+    .sidebar-link {
         @apply flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700
     }
-    .sidebar_link_active {
+    .sidebar-link-active {
         @apply flex items-center p-2 text-base font-medium text-gray-900 rounded-lg dark:text-white bg-gray-200 dark:bg-gray-750 hover:bg-gray-100 dark:hover:bg-gray-700
     }
-    .error_messages {
+    .error-messages {
         @apply mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 dark:bg-red-900 dark:text-red-200 rounded-lg
     }
-    /*.form-container*/
-    /*.form-group*/
+    .page-heading {
+       @apply mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white
+    }
+    .actions {
+        @apply flex items-center space-x-4 mt-4
+    }
+    .item-container {
+        @apply p-4 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 rounded-lg
+    }
+    .items-list {
+        @apply space-y-4;
+    }
+    .show-container {
+        @apply p-4 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 rounded-lg
+    }
+    .item-actions {
+        @apply flex items-center mt-2
+    }
+    .item-dt {
+        @apply mb-2 font-semibold leading-none text-gray-900 dark:text-white
+    }
+    .item-dd {
+       @apply mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400
+    }
+    .item-attachment {
+        @apply block mt-2 text-sm text-gray-500 dark:text-gray-400
+    }
+    .form-container {
+        @apply p-4 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 rounded-lg
+    }
+    .form-group {
+        @apply mb-4
+    }
 }
