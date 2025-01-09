@@ -5,9 +5,12 @@ class Team < ApplicationRecord
   include AASM
   include Team::States
 
+  has_many :memberships, dependent: :destroy
+  has_many :users, through: :memberships
+
   validates :name, presence: true
   validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9-]+\z/, message: "only allows letters, numbers, and hyphens" },
-            length: { minimum: 3, maximum: 39 }
+            length: { minimum: 3, maximum: 75 }
   validates :timezone, presence: true, inclusion: { in: TZInfo::Timezone.all_identifiers }
 
   private

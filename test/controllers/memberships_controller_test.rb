@@ -2,7 +2,10 @@ require "test_helper"
 
 class MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @membership = memberships(:one)
+    @user = Fabricate(:user)
+    @user.confirm
+    sign_in @user
+    @membership = Fabricate(:membership, user: @user)
   end
 
   def test_get_index
@@ -20,7 +23,7 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
       post memberships_url, params: { membership: { preferences: @membership.preferences, role: @membership.role, team_id: @membership.team_id, user_id: @membership.user_id } }
     end
 
-    assert_redirected_to membership_url(Membership.last)
+    assert_redirected_to membership_url(Membership.order(created_at: :desc).first)
   end
 
   def test_show_membership

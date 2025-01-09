@@ -7,6 +7,6 @@
 <br>
 
 <div class="actions">
-  <%%= link_to "Show this <%= human_name.downcase %>", <%= model_resource_name(prefix: "@") %>, class: "btn btn-primary me-2" %> |
+  <%%= link_to "Show this <%= human_name.downcase %>", <%= model_resource_name(prefix: "@") %>, class: "btn btn-primary me-2" %>
   <%%= link_to "Back to <%= human_name.pluralize.downcase %>", <%= index_helper(type: :path) %>, class: "btn btn-alt" %>
 </div>

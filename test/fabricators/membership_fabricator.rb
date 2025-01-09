@@ -1,6 +1,6 @@
 Fabricator(:membership) do
-  team        nil
-  user        nil
-  role        "owner"
+  team
+  user { Fabricate(:confirmed_user) }
+  role "owner"
   preferences { }
 end

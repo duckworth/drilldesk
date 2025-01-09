@@ -1,10 +1,12 @@
 class User < ApplicationRecord
   include User::Roles
+
+  has_many :memberships, dependent: :destroy
+  has_many :teams, through: :memberships
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :lockable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable,
-         authentication_keys: [ :email ]
+         :recoverable, :rememberable, :validatable, :confirmable
 
   attr_accessor :skip_valid_email
 
@@ -15,11 +17,5 @@ class User < ApplicationRecord
 
   def name
     [ first_name, last_name ].compact.join(" ")
-  end
-
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    email = conditions.delete(:email)&.downcase
-    find_by(email: email)
   end
 end

@@ -43,7 +43,7 @@ Truemail.configure do |config|
   # It is equal to empty array by default.
   # config.whitelisted_domains = ['somedomain1.com', 'somedomain2.com']
   config.whitelisted_domains = if Rails.env.local?
-                                 %w[example.com example.org example.net]
+                                 %w[example.com example.org example.net drilldesk.com]
   else
                                  []
   end

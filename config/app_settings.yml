@@ -1,5 +1,5 @@
 default: &default
-  mailer_sender: "no-reply@example.com"
+  mailer_sender: "no-reply@drilldesk.com"
   comment_host: "localhost:8080"
   app_host: "localhost:3000"
 
