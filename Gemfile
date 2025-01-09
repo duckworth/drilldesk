@@ -53,7 +53,7 @@ gem "has_scope"
 gem "local_time"
 gem "mission_control-jobs"
 gem "pagy"
-# gem "paper_trail" # todo
+gem "paper_trail"
 gem "rubyzip"
 gem "show_for"
 gem "truemail"

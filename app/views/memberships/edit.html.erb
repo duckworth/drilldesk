@@ -1,0 +1,12 @@
+<% content_for :title, "Editing membership" %>
+
+<h1 class="page-heading">Editing membership</h1>
+
+<%= render "form", membership: @membership %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Show this membership", @membership, class: "btn btn-primary me-2" %> |
+  <%= link_to "Back to memberships", memberships_path, class: "btn btn-alt" %>
+</div>

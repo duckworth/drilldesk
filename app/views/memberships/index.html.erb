@@ -1,0 +1,20 @@
+<% content_for :title, "Memberships" %>
+
+<h1 class="page-heading">Memberships</h1>
+
+<div class="items-list" id="memberships">
+  <% @memberships.each do |membership| %>
+    <div class="item-container">
+    <%= render membership %>
+    <div class="item-actions">
+      <%= link_to "Show this membership", membership, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New membership", new_membership_path, class: 'btn btn-primary' %>
+</div>

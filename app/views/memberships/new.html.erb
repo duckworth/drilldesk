@@ -1,0 +1,11 @@
+<% content_for :title, "New membership" %>
+
+<h1 class="page-heading">New membership</h1>
+
+<%= render "form", membership: @membership %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Back to memberships", memberships_path, class: "btn btn-alt" %>
+</div>

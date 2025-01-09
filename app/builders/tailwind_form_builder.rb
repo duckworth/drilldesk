@@ -66,7 +66,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     }.merge(opts), checked_value, unchecked_value)
 
     label = tailwind_label(method, {
-      class: "ml-3 text-sm block pt-xs"
+      class: "ml-3 text-sm block pt-xs font-medium text-gray-900 dark:text-white"
     }.merge(custom_opts[:label] || {}), opts)
 
     @template.content_tag("div", field + label, { class: custom_opts[:wrapper_classes] || "mt-2 flex items-center gap-x-1" })

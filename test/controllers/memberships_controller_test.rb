@@ -1,0 +1,48 @@
+require "test_helper"
+
+class MembershipsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @membership = memberships(:one)
+  end
+
+  def test_get_index
+    get memberships_url
+    assert_response :success
+  end
+
+  def test_get_new
+    get new_membership_url
+    assert_response :success
+  end
+
+  def test_create_membership
+    assert_difference("Membership.count") do
+      post memberships_url, params: { membership: { preferences: @membership.preferences, role: @membership.role, team_id: @membership.team_id, user_id: @membership.user_id } }
+    end
+
+    assert_redirected_to membership_url(Membership.last)
+  end
+
+  def test_show_membership
+    get membership_url(@membership)
+    assert_response :success
+  end
+
+  def test_get_edit
+    get edit_membership_url(@membership)
+    assert_response :success
+  end
+
+  def test_update_membership
+    patch membership_url(@membership), params: { membership: { preferences: @membership.preferences, role: @membership.role, team_id: @membership.team_id, user_id: @membership.user_id } }
+    assert_redirected_to membership_url(@membership)
+  end
+
+  def test_destroy_membership
+    assert_difference("Membership.count", -1) do
+      delete membership_url(@membership)
+    end
+
+    assert_redirected_to memberships_url
+  end
+end

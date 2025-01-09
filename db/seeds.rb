@@ -1,12 +1,6 @@
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 
 # Fetch initial user details from environment variables
 email = ENV['INITIAL_USER_EMAIL']
@@ -31,3 +25,20 @@ if email.present? && password.present?
     puts "User with email #{email} already exists."
   end
 end
+
+team = Team.find_or_create_by(slug: 'default-team') do |t|
+  t.name = 'Default Team'
+  t.is_test = true
+end
+
+if email.present?
+  if (user = User.find_by(email: email))
+    Membership.find_or_create_by(user: user, team: team) do |membership|
+      membership.role = 'owner'
+    end
+  end
+end
+
+# load environment-specific seed file
+environment_seed_file = Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb")
+load(environment_seed_file) if File.exist?(environment_seed_file)
