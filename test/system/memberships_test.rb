@@ -13,13 +13,14 @@ class MembershipsTest < ApplicationSystemTestCase
   end
 
   def test_creating_Membership
+    user_2 = Fabricate(:user)
     visit memberships_url
     click_on "New membership"
 
     fill_in "Preferences", with: @membership.preferences
     fill_in "Role", with: @membership.role
     fill_in "Team", with: @membership.team_id
-    fill_in "User", with: @membership.user_id
+    fill_in "User", with: user_2.id
     click_on "Create Membership"
 
     assert_text "Membership was successfully created"

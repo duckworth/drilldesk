@@ -19,8 +19,10 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_create_membership
+    user_2 = Fabricate(:user)
+
     assert_difference("Membership.count") do
-      post memberships_url, params: { membership: { preferences: @membership.preferences, role: @membership.role, team_id: @membership.team_id, user_id: @membership.user_id } }
+      post memberships_url, params: { membership: { preferences: @membership.preferences, role: @membership.role, team_id: @membership.team_id, user_id: user_2.id } }
     end
 
     assert_redirected_to membership_url(Membership.order(created_at: :desc).first)

@@ -41,7 +41,7 @@ class AuthenticatedController < ApplicationController
     redirect_to(request.referer || root_path)
   end
 
-  def reset_current_user
+  def reset_current
     Current.user = nil
     Current.team = nil
     Current.membership = nil
