@@ -325,10 +325,10 @@ CREATE INDEX index_memberships_on_team_id ON public.memberships USING btree (tea
 
 
 --
--- Name: index_memberships_on_user_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_memberships_on_user_id_and_team_id; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX index_memberships_on_user_id ON public.memberships USING btree (user_id);
+CREATE UNIQUE INDEX index_memberships_on_user_id_and_team_id ON public.memberships USING btree (user_id, team_id);
 
 
 --
