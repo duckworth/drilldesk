@@ -6,16 +6,16 @@ class ApplicationController < ActionController::Base
   # allow_browser versions: :modern
   layout :set_layout
 
-
   private
+
   def set_team_unauthenticated
     if params[:team_slug].present?
       team = Team.friendly.find(params[:team_slug])
       set_current_tenant(team)
-    else
-      # Handle cases where team_slug is not present?
     end
+    # Handle cases where team_slug is not present?
   end
+
   def set_layout
     if devise_controller?
       "devise"
@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
       "application"
     end
   end
+
   def set_request_id
     # Get the request UUID from Rails/Rack
     Current.request_id = request.uuid

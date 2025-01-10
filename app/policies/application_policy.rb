@@ -81,7 +81,7 @@ class ApplicationPolicy
       @user = user
       @scope = scope
       @team = ActsAsTenant.current_tenant
-      @membership = user&.memberships&.find_by(team_id: @team.id) if @team
+      @membership = Current.membership
     end
 
     # Default: restrict records to the current tenant
