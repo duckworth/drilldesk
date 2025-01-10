@@ -7,12 +7,12 @@ class MembershipsTest < ApplicationSystemTestCase
     sign_in @user
   end
 
-  def test_visiting_index
+  test "visiting index" do
     visit memberships_url
     assert_selector "h1", text: "Memberships"
   end
 
-  def test_creating_Membership
+  test "creating Membership" do
     user_2 = Fabricate(:user)
     visit memberships_url
     click_on "New membership"
@@ -27,7 +27,7 @@ class MembershipsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  def test_updating_Membership
+  test "updating Membership" do
     visit membership_url(@membership)
     click_on "Edit this membership", match: :first
 
@@ -41,7 +41,7 @@ class MembershipsTest < ApplicationSystemTestCase
     click_on "Back"
   end
 
-  def test_destroying_Membership
+  test "destroying Membership" do
     visit membership_url(@membership)
     click_on "Destroy this membership", match: :first
 
