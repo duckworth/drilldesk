@@ -16,6 +16,6 @@ end
 
 Fabricator(:user_with_team, from: :user) do
   after_build do |user|
-    user.membership ||= Fabricate(:membership, user: user)
+    Fabricate(:membership, user: user)
   end
 end

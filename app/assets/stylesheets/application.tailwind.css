@@ -73,7 +73,7 @@
         @apply mt-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 dark:bg-red-900 dark:text-red-200 rounded-lg
     }
     .page-heading {
-       @apply mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white
+       @apply mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white
     }
     .actions {
         @apply flex items-center space-x-4 mt-4

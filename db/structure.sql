@@ -43,6 +43,72 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: exercise_objectives; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.exercise_objectives (
+    id bigint NOT NULL,
+    name character varying,
+    description text,
+    enabled boolean,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: exercise_objectives_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.exercise_objectives_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: exercise_objectives_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.exercise_objectives_id_seq OWNED BY public.exercise_objectives.id;
+
+
+--
+-- Name: exercise_types; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.exercise_types (
+    id bigint NOT NULL,
+    name character varying,
+    description text,
+    enabled boolean,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: exercise_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.exercise_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: exercise_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.exercise_types_id_seq OWNED BY public.exercise_types.id;
+
+
+--
 -- Name: flipper_features; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -197,6 +263,20 @@ CREATE TABLE public.versions (
 
 
 --
+-- Name: exercise_objectives id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_objectives ALTER COLUMN id SET DEFAULT nextval('public.exercise_objectives_id_seq'::regclass);
+
+
+--
+-- Name: exercise_types id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_types ALTER COLUMN id SET DEFAULT nextval('public.exercise_types_id_seq'::regclass);
+
+
+--
 -- Name: flipper_features id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -224,6 +304,22 @@ ALTER TABLE ONLY public.active_admin_comments
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: exercise_objectives exercise_objectives_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_objectives
+    ADD CONSTRAINT exercise_objectives_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: exercise_types exercise_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_types
+    ADD CONSTRAINT exercise_types_pkey PRIMARY KEY (id);
 
 
 --
@@ -396,6 +492,8 @@ ALTER TABLE ONLY public.memberships
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250110223000'),
+('20250110215925'),
 ('20250109111426'),
 ('20250109103253'),
 ('20250109102927'),

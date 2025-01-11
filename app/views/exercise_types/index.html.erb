@@ -1,0 +1,17 @@
+<% content_for :title, "Exercise types" %>
+
+<h1 class="page-heading">Exercise types</h1>
+
+<div class="items-list" id="exercise_types">
+  <% @exercise_types.each do |exercise_type| %>
+    <div class="item-container">
+    <%= render exercise_type %>
+    <div class="item-actions">
+      <%= link_to "Show this exercise type", exercise_type, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>

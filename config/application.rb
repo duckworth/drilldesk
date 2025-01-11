@@ -30,7 +30,7 @@ module Drilldesk
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
-      g.test_framework :minitest, spec: false, fixture_replacement: :fabrication
+      g.test_framework :test_unit, spec: false, fixture_replacement: :fabrication
       g.fixture_replacement :fabrication, dir: "test/fabricators"
       g.jbuilder false
     end

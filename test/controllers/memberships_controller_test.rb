@@ -2,10 +2,9 @@ require "test_helper"
 
 class MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = Fabricate(:user)
-    @user.confirm
+    @user = Fabricate(:user_with_team)
     sign_in @user
-    @membership = Fabricate(:membership, user: @user)
+    @membership = @user.memberships.first
   end
 
   test "get index" do

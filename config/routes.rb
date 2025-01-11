@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
   resources :memberships
 
+  resources :exercise_types, only: [ :index, :show ]
+  resources :exercise_objectives, only: [ :index, :show ]
   # Defines the root path route ("/")
   # root "posts#index"
   root to: "pages#home"

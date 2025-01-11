@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   before_action :set_team_unauthenticated
-  around_action :set_request_id
+  before_action :set_request_id
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   # allow_browser versions: :modern
   layout :set_layout
@@ -25,10 +25,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_request_id
-    # Get the request UUID from Rails/Rack
     Current.request_id = request.uuid
-    yield # Always ensure the action will execute
-  ensure
-    Current.request_id = nil
   end
 end

@@ -1,0 +1,2 @@
+class ExerciseObjective < ApplicationRecord
+end
