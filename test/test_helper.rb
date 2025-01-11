@@ -3,6 +3,7 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/rails"
 require "faker"
+Dir[Rails.root.join("test/support/**/*.rb")].each { |f| require f }
 
 module ActiveSupport
   class TestCase
@@ -13,16 +14,36 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
     setup :global_setup
+    teardown :global_teardown
+
     # Devise RuntimeError: Could not find a valid mapping for #<User
     ActiveSupport.on_load(:action_mailer) do
       Rails.application.reload_routes_unless_loaded
     end
-    def global_setup
-      # stuff to run before _every_ test.
-      @default_team = Fabricate(:default_team)
-      ActsAsTenant.test_tenant = @default_team
-      # puts "global setup  ActsAsTenant.current_tenant #{ ActsAsTenant.current_tenant&.inspect}"
+
+    def user_with_team
+      user = Fabricate(:user_with_team)
+      team = user.teams.first
+      ActsAsTenant.test_tenant = team
+      [ user, team ]
     end
-    # Add more helper methods to be used by all tests here...
+    def global_setup
+      nil if self.class.skip_global_setup?
+    end
+
+    def global_teardown
+      nil if self.class.skip_global_setup?
+    end
+
+    class << self
+      attr_accessor :skip_global_flag
+
+      def skip_global_setup?
+        skip_global_flag
+      end
+      def skip_global_setup
+        self.skip_global_flag = true
+      end
+    end
   end
 end

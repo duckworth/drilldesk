@@ -1,0 +1,20 @@
+<% content_for :title, "Custom scenarios" %>
+
+<h1 class="page-heading">Custom scenarios</h1>
+
+<div class="items-list" id="custom_scenarios">
+  <% @custom_scenarios.each do |custom_scenario| %>
+    <div class="item-container">
+    <%= render custom_scenario %>
+    <div class="item-actions">
+      <%= link_to "Show this custom scenario", custom_scenario, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New custom scenario", new_custom_scenario_path, class: 'btn btn-primary' %>
+</div>

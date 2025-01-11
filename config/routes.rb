@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   scope "/t/:team_slug" do
+    resources :custom_scenarios
   end
+
   resources :memberships
 
   resources :exercise_types, only: [ :index, :show ]

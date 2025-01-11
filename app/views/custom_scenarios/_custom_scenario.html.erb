@@ -1,0 +1,25 @@
+<div id="<%= dom_id custom_scenario %>">
+  <dl class="item-dl">
+    <dt class="item-dt">Team</dt>
+    <dd class="item-dd"><%= custom_scenario.team_id %></dd>
+
+    <dt class="item-dt">Name</dt>
+    <dd class="item-dd"><%= custom_scenario.name %></dd>
+
+    <dt class="item-dt">Description</dt>
+    <dd class="item-dd"><%= custom_scenario.description %></dd>
+
+    <dt class="item-dt">Exercise type</dt>
+    <dd class="item-dd"><%= custom_scenario.exercise_type_id %></dd>
+
+    <dt class="item-dt">Source file</dt>
+    <%= link_to custom_scenario.source_file.filename, custom_scenario.source_file, class: "btn btn-alt" if custom_scenario.source_file.attached? %>
+
+    <dt class="item-dt">Source text</dt>
+    <dd class="item-dd"><%= custom_scenario.source_text %></dd>
+
+    <dt class="item-dt">Created by</dt>
+    <dd class="item-dd"><%= custom_scenario.created_by_id %></dd>
+
+  </dl>
+</div>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AuthenticatedController < ApplicationController
+  include ActsAsTenant::ControllerExtensions::Filter
   skip_before_action :set_team_unauthenticated
   include Pundit::Authorization
   before_action :authenticate_user!
@@ -34,6 +35,10 @@ class AuthenticatedController < ApplicationController
       logger.warn "User #{current_user.id} attempted to access team #{params[:team_slug]} without permission."
       redirect_to root_path
     end
+  end
+  def default_url_options
+    # Assuming @team is set in a before_action like set_team_and_membership
+    { team_slug: @team&.slug }.merge(super)
   end
 
   def user_not_authorized

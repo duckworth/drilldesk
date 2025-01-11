@@ -15,7 +15,10 @@ Fabricator(:unconfirmed_user, from: :user_base) do
 end
 
 Fabricator(:user_with_team, from: :user) do
-  after_build do |user|
-    Fabricate(:membership, user: user)
+  transient :team
+
+  after_build do |user, transients|
+    team = transients[:team] || Fabricate(:team)
+    Fabricate(:membership, user: user, team: team)
   end
 end

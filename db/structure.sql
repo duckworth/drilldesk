@@ -88,6 +88,23 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: custom_scenarios; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.custom_scenarios (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    team_id uuid NOT NULL,
+    name character varying,
+    description text,
+    exercise_type_id bigint NOT NULL,
+    source_text text,
+    created_by_id uuid,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: exercise_objectives; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -376,6 +393,14 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: custom_scenarios custom_scenarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_scenarios
+    ADD CONSTRAINT custom_scenarios_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: exercise_objectives exercise_objectives_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -518,6 +543,27 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
+-- Name: index_custom_scenarios_on_created_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_custom_scenarios_on_created_by_id ON public.custom_scenarios USING btree (created_by_id);
+
+
+--
+-- Name: index_custom_scenarios_on_exercise_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_custom_scenarios_on_exercise_type_id ON public.custom_scenarios USING btree (exercise_type_id);
+
+
+--
+-- Name: index_custom_scenarios_on_team_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_custom_scenarios_on_team_id ON public.custom_scenarios USING btree (team_id);
+
+
+--
 -- Name: index_flipper_features_on_key; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -596,6 +642,22 @@ ALTER TABLE ONLY public.active_storage_blobs
 
 
 --
+-- Name: custom_scenarios fk_rails_115dd11b4f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_scenarios
+    ADD CONSTRAINT fk_rails_115dd11b4f FOREIGN KEY (created_by_id) REFERENCES public.users(id);
+
+
+--
+-- Name: custom_scenarios fk_rails_63272d75ab; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_scenarios
+    ADD CONSTRAINT fk_rails_63272d75ab FOREIGN KEY (exercise_type_id) REFERENCES public.exercise_types(id);
+
+
+--
 -- Name: active_storage_variant_records fk_rails_69f42507fa; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -636,6 +698,14 @@ ALTER TABLE ONLY public.memberships
 
 
 --
+-- Name: custom_scenarios fk_rails_b6979c0489; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_scenarios
+    ADD CONSTRAINT fk_rails_b6979c0489 FOREIGN KEY (team_id) REFERENCES public.teams(id);
+
+
+--
 -- Name: active_storage_attachments fk_rails_c3b3935057; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -650,6 +720,7 @@ ALTER TABLE ONLY public.active_storage_attachments
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250111131427'),
 ('20250111123410'),
 ('20250110223000'),
 ('20250110215925'),

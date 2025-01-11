@@ -1,0 +1,11 @@
+<% content_for :title, "New custom scenario" %>
+
+<h1 class="page-heading">New custom scenario</h1>
+
+<%= render "form", custom_scenario: @custom_scenario %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Back to custom scenarios", custom_scenarios_path, class: "btn btn-alt" %>
+</div>

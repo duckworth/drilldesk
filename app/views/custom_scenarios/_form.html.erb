@@ -1,0 +1,48 @@
+<%= form_with(model: custom_scenario) do |form| %>
+	<div class="form-container">
+		<% if custom_scenario.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(custom_scenario.errors.count, "error") %> prohibited this custom_scenario
+				from being saved:</h2>
+
+			<ul>
+				<% custom_scenario.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :team_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :name %>
+		</div>
+
+		<div class="form-group">
+				<%= form.textarea :description %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :exercise_type_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.file_field :source_file %>
+		</div>
+
+		<div class="form-group">
+				<%= form.textarea :source_text %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :created_by_id %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

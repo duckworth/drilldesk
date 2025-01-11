@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @custom_scenario %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this custom scenario", edit_custom_scenario_path(@custom_scenario), class: "btn btn-primary" %>
+  <%= link_to "Back to custom scenarios", custom_scenarios_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this custom scenario", @custom_scenario, method: :delete, class: "btn btn-alt" %>
+</div>

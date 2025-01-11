@@ -13,6 +13,9 @@ class Team < ApplicationRecord
             length: { minimum: 3, maximum: 75 }
   validates :timezone, presence: true, inclusion: { in: TZInfo::Timezone.all_identifiers }
 
+  def to_s
+    slug
+  end
   private
 
   # def generate_slug
