@@ -3,6 +3,8 @@ require "application_system_test_case"
 class ExerciseObjectivesTest < ApplicationSystemTestCase
   setup do
     @exercise_objective = Fabricate(:exercise_objective)
+    @user = Fabricate(:user)
+    sign_in @user
   end
 
   test "visiting the index" do
