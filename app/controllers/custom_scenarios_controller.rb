@@ -1,4 +1,4 @@
-class CustomScenariosController < AuthenticatedController
+class CustomScenariosController < BaseTeamController
   before_action :set_custom_scenario, only: %i[ show edit update destroy ]
 
   # GET /custom_scenarios
@@ -50,7 +50,7 @@ class CustomScenariosController < AuthenticatedController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_custom_scenario
-    @custom_scenario = CustomScenario.find(params.expect(:id))
+    @custom_scenario = CustomScenario.includes(:created_by, :exercise_type).find(params.expect(:id))
   end
 
   # Only allow a list of trusted parameters through.

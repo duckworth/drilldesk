@@ -5,7 +5,8 @@ module NavigationHelper
 
   def navigation_menu_items
     [
-      MenuItem.new("Dashboard", root_path, "flowbite/objects_column_solid", -> { user_signed_in? }),
+      MenuItem.new("Dashboard", dashboard_path, "flowbite/objects_column_solid", -> { user_signed_in? }),
+      MenuItem.new("Custom Scenarios", custom_scenarios_path, "solar/clapperboard_bold", -> { user_signed_in? }),
       MenuItem.new("Admin", admin_root_path, "material_symbols/admin_panel_settings", -> { user_signed_in? && current_user.sys_admin? })
     ]
   end

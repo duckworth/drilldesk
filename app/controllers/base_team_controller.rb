@@ -1,0 +1,2 @@
+class BaseTeamController < AuthenticatedController
+end

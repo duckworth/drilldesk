@@ -9,7 +9,7 @@ class TailwindClassBuilder
       "mt-4 px-1 sm:px-3 py-sm sm:py-1 font-semibold bg-transparent border rounded",
       case button_type
       when :button then "enabled:cursor-pointer disabled:cursor-not-allowed"
-      when :link then "no-link-style cursor-pointer whitespace-nowrap inline-block h-fit "
+      when :link then "font-medium text-blue-600 dark:text-blue-500 no-link-style cursor-pointer whitespace-nowrap inline-block h-fit "
       end,
       # color classes
       case options.delete(:variant) { :commit }

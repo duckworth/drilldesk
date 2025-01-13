@@ -14,10 +14,6 @@
 		<% end %>
 
 		<div class="form-group">
-				<%= form.text_field :team_id %>
-		</div>
-
-		<div class="form-group">
 				<%= form.text_field :name %>
 		</div>
 
@@ -26,7 +22,7 @@
 		</div>
 
 		<div class="form-group">
-				<%= form.text_field :exercise_type_id %>
+			<%= form.select :exercise_type_id, ExerciseType.enabled.pluck(:name, :id), { prompt: "Select an Exercise Type" } %>
 		</div>
 
 		<div class="form-group">
@@ -35,10 +31,6 @@
 
 		<div class="form-group">
 				<%= form.textarea :source_text %>
-		</div>
-
-		<div class="form-group">
-				<%= form.text_field :created_by_id %>
 		</div>
 
 		<div class="actions">

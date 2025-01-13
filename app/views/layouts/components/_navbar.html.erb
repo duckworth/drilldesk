@@ -66,6 +66,12 @@
             <span class="block text-sm font-semibold text-gray-900 dark:text-white"><%=current_user.name %></span>
             <span class="block text-sm text-gray-900 truncate dark:text-white"><%=current_user.email %></span>
           </div>
+          <% if Current.team %>
+            <div class="py-3 px-4">
+              <span class="block text-sm font-semibold text-gray-900 dark:text-white">Team</span>
+              <span class="block text-sm text-gray-900 truncate dark:text-white"><%= link_to Current.team&.name, teams_path %></span>
+            </div>
+          <% end %>
           <% if current_user.sys_admin? %>
             <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown">
               <li><%= link_to "Admin", admin_root_path, class: "block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white" %></li>

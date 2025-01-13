@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class DeviseCreateUsers < ActiveRecord::Migration[8.0]
+class CreateUsers < ActiveRecord::Migration[8.0]
   def change
     create_table :users, id: :uuid do |t|
       ## Database authenticatable
@@ -35,6 +35,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.datetime :locked_at
 
       t.string :sys_roles, array: true, null: false, default: []
+      t.jsonb :settings, null: false, default: {}
+      t.uuid :last_team_id
 
       t.timestamps null: false
     end

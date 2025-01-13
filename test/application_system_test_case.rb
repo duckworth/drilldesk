@@ -7,4 +7,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   register_spec_type(self) do |desc, *addl|
     addl.include? :system
   end
+
+  teardown do
+    ActsAsTenant.test_tenant = nil
+  end
 end

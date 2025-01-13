@@ -1,0 +1,16 @@
+<% content_for :title, "Teams" %>
+
+<h1 class="page-heading">Choose Teams</h1>
+
+<div class="items-list" id="teams">
+  <% @teams.each do |team| %>
+    <div class="item-container">
+        <%= team.name %>
+        <%= button_to "Choose", choose_team_path(team), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>

@@ -2,7 +2,9 @@ require "application_system_test_case"
 
 class CustomScenariosTest < ApplicationSystemTestCase
   setup do
-    @custom_scenario = Fabricate(:custom_scenario)
+    @user, @team = user_with_team
+    sign_in @user
+    @custom_scenario = Fabricate(:custom_scenario, team: @team, created_by: @user)
   end
 
   test "visiting the index" do

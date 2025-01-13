@@ -5,5 +5,5 @@ Fabricator(:custom_scenario) do
   exercise_type
   source_file   nil
   source_text   "MyText"
-  created_by
+  created_by { |attrs| attrs[:team]&.users&.first }
 end

@@ -2,7 +2,6 @@
 
 class AuthenticatedController < ApplicationController
   include ActsAsTenant::ControllerExtensions::Filter
-  skip_before_action :set_team_unauthenticated
   include Pundit::Authorization
   before_action :authenticate_user!
   before_action :set_paper_trail_whodunnit
@@ -14,31 +13,37 @@ class AuthenticatedController < ApplicationController
   private
 
   def set_team_and_membership
-    return if params[:team_slug].blank?
+    @membership = if session[:current_team_id].present?
+                    # Load a specific membership and associated team from the session team_id
+                    current_user.memberships.includes(:team).find_by(team_id: session[:current_team_id])
+    else
+                    # Lazy-load user's memberships with their associated teams
+                    memberships = current_user.memberships.includes(:team).limit(2).to_a
 
-    # Attempt to find membership + team in one query
-    @membership = current_user.memberships
-                              .includes(:team)
-                              .find_by(teams: { slug: params[:team_slug] })
+                    if memberships.size == 1
+                      # If the user has exactly one membership, use it
+                      session[:current_team_id] = memberships.first.team_id
+                      memberships.first
+                    else
+                      # Redirect if no session is set and multiple teams exist
+                      return redirect_to choose_team_path
+                    end
+    end
 
     if @membership
+      # Populate necessary instance variables and tenant context
       @team = @membership.team
       set_current_tenant(@team)
       Current.team = @team
       Current.membership = @membership
       Current.user = current_user
     else
-      # This means either the team doesn't exist or
-      # the current_user is not part of that team.
-      # handle gracefully (404 or redirect)
-      flash[:alert] = "You are not authorized."
-      logger.warn "User #{current_user.id} attempted to access team #{params[:team_slug]} without permission."
+      # Handle the edge case where the specified team is invalid or unauthorized
+      flash[:alert] = "You are not authorized or the selected team does not exist."
+      logger.warn "User #{current_user.id} attempted to access team (id=#{session[:current_team_id]}) without permission."
+      session[:current_team_id] = nil
       redirect_to root_path
     end
-  end
-  def default_url_options
-    # Assuming @team is set in a before_action like set_team_and_membership
-    { team_slug: @team&.slug }.merge(super)
   end
 
   def user_not_authorized

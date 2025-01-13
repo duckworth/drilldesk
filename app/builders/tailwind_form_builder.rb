@@ -16,7 +16,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   #   actionview/lib/action_view/helpers/form_helper.rb
   [ :text_field,
    :password_field,
-   :text_area,
+   :textarea,
    :color_field,
    :search_field,
    :telephone_field,
@@ -107,12 +107,14 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
 
     label = tailwind_label(method, custom_opts[:label], html_options)
 
-    [ label, { class: class_names(
-      "mt-1 rounded-md shadow-sm focus:ring focus:ring-success focus:ring-opacity-50",
+    select_classes = class_names(
+      select_field_classes,
       { custom_opts[:field_classes] => custom_opts[:field_classes].present? },
       ("block w-full" unless custom_opts[:inline]),
       border_color_classes(method)
-    ) }.merge(html_opts) ]
+    )
+
+    [ label, html_opts.merge(class: select_classes) ]
   end
 
   def select(method, choices = nil, options = {}, html_options = {}, &)
@@ -163,9 +165,15 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
 
     label = tailwind_label(object_method, custom_opts[:label], options)
 
+    field_classes = if field_method == :file_field
+                      file_field_classes
+    else
+                      text_like_field_classes
+    end
+
     field = send(field_method, object_method, {
       class: class_names(
-        text_like_field_classes,
+        field_classes,
         { custom_opts[:field_classes] => custom_opts[:field_classes].present? },
         ("mt-1 block w-full" unless custom_opts[:inline]),
         border_color_classes(object_method)

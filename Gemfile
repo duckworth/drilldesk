@@ -43,6 +43,7 @@ end
 gem "aasm"
 gem "active_model_validates_intersection_of"
 gem "activeadmin", ">= 4.0.0.beta15"
+# gem "activerecord-typedstore", github: "byroot/activerecord-typedstore"
 gem "acts_as_tenant"
 gem "devise"
 gem "flipper"
