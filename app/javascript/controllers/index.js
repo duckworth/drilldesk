@@ -3,6 +3,9 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
+import ErrorsController from "./errors_controller";
+
+application.register("errors", ErrorsController);
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

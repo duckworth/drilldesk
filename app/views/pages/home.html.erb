@@ -1,6 +1,17 @@
 <div class="px-4 pt-6">
   <div class="p-4 bg-white rounded-lg shadow sm:p-6 xl:p-8 dark:bg-gray-800">
-    <div class="flex justify-between items-center mb-4">
+    <button data-controller="hello"
+      data-hello-type="success"
+      data-hello-message="Custom message from HTML"
+      class="btn btn-primary mb-2">Click Me</button>
+    <button data-controller="hello"
+      data-hello-type="error"
+      data-hello-message="Custom message from HTML error"
+      class="btn btn-primary mb-2">Click Me</button>
+    <button data-controller="hello"
+      data-hello-type="warning"
+      data-hello-message="Custom message from HTML warning"
+      class="btn btn-primary mb-2">Click Me</button><div class="flex justify-between items-center mb-4">
       <button data-tooltip-target="tooltip-default" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Default
         tooltip
       </button>

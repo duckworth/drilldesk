@@ -4,10 +4,12 @@
   <%= render "layouts/head" %>
 </head>
 <body class="h-full">
+
 <div class="h-full antialiased bg-gray-50 dark:bg-gray-900">
   <%= render "layouts/components/navbar" %>
   <%= render "layouts/components/sidebar" %>
   <main class="p-4 md:ml-64 h-auto pt-20 min-h-screen">
+    <div data-controller="errors" data-errors-target="container"></div>
     <%= render "shared/flash" %>
     <%= yield %>
   </main>

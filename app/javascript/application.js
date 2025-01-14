@@ -4,3 +4,4 @@ import "./controllers"
 import "flowbite/dist/flowbite.turbo.js";
 import "./dark_mode"
 
+

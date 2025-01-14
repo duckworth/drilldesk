@@ -1,5 +1,8 @@
+@import "toastify-js/src/toastify.css";
+
 @import "./pagy.tailwind.css";
 @import "./alerts.css";
+@import "./toast.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
