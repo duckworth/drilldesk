@@ -1,15 +1,23 @@
 <% content_for :title, "Teams" %>
-
-<h1 class="page-heading">Choose Teams</h1>
-
-<div class="items-list" id="teams">
-  <% @teams.each do |team| %>
-    <div class="item-container">
-        <%= team.name %>
-        <%= button_to "Choose", choose_team_path(team), class: 'btn btn-primary' %>
-      </div>
-    </div>
-  <% end %>
+<h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Choose Team</h2>
+<div class="max-w-[80%] p-4 mt-4 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-700 rounded-lg" id="teams">
+  <table class="text-left font-medium text-gray-900 dark:text-white md:table-fixed">
+    <tbody class="divide-y divide-gray-200 dark:divide-gray-800">
+    <% @teams.each do |team| %>
+      <tr>
+        <td class="whitespace-nowrap py-4 md:w-[90%]">
+          <div class="flex items-center gap-4">
+            <%= icon "ri/team_fill", classes: icon_classes(size: 10) %>
+            <%= button_to team.name, choose_team_path(team), class: "link" %>
+          </div>
+        </td>
+        <td class="p-4 text-right text-base font-bold text-gray-900 dark:text-white">
+          <%= button_to "Choose", choose_team_path(team), class: 'btn btn-primary' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 <div class="pagination">
   <%== pagy_nav(@pagy) %>
