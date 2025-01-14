@@ -4,8 +4,9 @@
 
 import { application } from "./application"
 import ErrorsController from "./errors_controller";
-
+import ToastController from "./toast_controller";
 application.register("errors", ErrorsController);
+application.register("toast", ToastController);
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
