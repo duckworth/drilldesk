@@ -10,7 +10,11 @@
     <dd class="item-dd"><%= custom_scenario.exercise_type.name %></dd>
 
     <dt class="item-dt">Source file</dt>
-    <%= link_to custom_scenario.source_file.filename, custom_scenario.source_file, class: "btn btn-alt" if custom_scenario.source_file.attached? %>
+    <dd class="item-dd">
+      <div class="flex items-center">
+        <%= link_to custom_scenario.source_file.filename, custom_scenario.source_file, class: "btn btn-alt" if custom_scenario.source_file.attached? %>
+      </div>
+    </dd>
 
     <dt class="item-dt">Source text</dt>
     <dd class="item-dd"><%= custom_scenario.source_text %></dd>

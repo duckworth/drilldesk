@@ -28,6 +28,7 @@ module Drilldesk
     config.active_record.schema_format = :sql
     config.mission_control.jobs.http_basic_auth_enabled = false
 
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.test_framework :test_unit, spec: false, fixture_replacement: :fabrication
