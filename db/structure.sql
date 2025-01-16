@@ -88,6 +88,23 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: custom_events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.custom_events (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    team_id uuid NOT NULL,
+    name character varying,
+    description text,
+    custom_scenario_id uuid NOT NULL,
+    trigger_keywords jsonb,
+    sequence_order integer DEFAULT 0 NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: custom_scenarios; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -105,6 +122,21 @@ CREATE TABLE public.custom_scenarios (
 
 
 --
+-- Name: exercise_objective_assignments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.exercise_objective_assignments (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    team_id uuid NOT NULL,
+    exercise_id uuid NOT NULL,
+    exercise_objective_id bigint NOT NULL,
+    priority integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: exercise_objectives; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -112,7 +144,7 @@ CREATE TABLE public.exercise_objectives (
     id bigint NOT NULL,
     name character varying,
     description text,
-    enabled boolean,
+    enabled boolean DEFAULT true NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -145,7 +177,7 @@ CREATE TABLE public.exercise_types (
     id bigint NOT NULL,
     name character varying,
     description text,
-    enabled boolean,
+    enabled boolean DEFAULT true NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -168,6 +200,31 @@ CREATE SEQUENCE public.exercise_types_id_seq
 --
 
 ALTER SEQUENCE public.exercise_types_id_seq OWNED BY public.exercise_types.id;
+
+
+--
+-- Name: exercises; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.exercises (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    team_id uuid NOT NULL,
+    name character varying NOT NULL,
+    purpose text,
+    status character varying DEFAULT 'not_started'::character varying NOT NULL,
+    exercise_type_id bigint NOT NULL,
+    custom_scenario_id uuid,
+    predefined_scenario_id uuid,
+    exercise_date timestamp(6) without time zone,
+    context_data jsonb,
+    owner_id uuid,
+    in_progress_at timestamp(6) without time zone,
+    exercised_at timestamp(6) without time zone,
+    retrospecting_at timestamp(6) without time zone,
+    retrospected_at timestamp(6) without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
 
 
 --
@@ -250,6 +307,51 @@ CREATE TABLE public.memberships (
 
 
 --
+-- Name: predefined_event_transitions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.predefined_event_transitions (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    from_event_id uuid NOT NULL,
+    to_event_id uuid NOT NULL,
+    condition jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: predefined_events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.predefined_events (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name character varying,
+    description text,
+    predefined_scenario_id uuid NOT NULL,
+    trigger_conditions jsonb DEFAULT '{}'::jsonb NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: predefined_scenarios; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.predefined_scenarios (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    name character varying,
+    description text,
+    enabled boolean DEFAULT true NOT NULL,
+    exercise_type_id bigint NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL,
+    starting_scenario_event_id uuid
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -303,6 +405,7 @@ CREATE TABLE public.users (
     sys_roles character varying[] DEFAULT '{}'::character varying[] NOT NULL,
     settings jsonb DEFAULT '{}'::jsonb NOT NULL,
     last_team_id uuid,
+    disabled_at timestamp(6) without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -394,11 +497,27 @@ ALTER TABLE ONLY public.ar_internal_metadata
 
 
 --
+-- Name: custom_events custom_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_events
+    ADD CONSTRAINT custom_events_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: custom_scenarios custom_scenarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.custom_scenarios
     ADD CONSTRAINT custom_scenarios_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: exercise_objective_assignments exercise_objective_assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_objective_assignments
+    ADD CONSTRAINT exercise_objective_assignments_pkey PRIMARY KEY (id);
 
 
 --
@@ -415,6 +534,14 @@ ALTER TABLE ONLY public.exercise_objectives
 
 ALTER TABLE ONLY public.exercise_types
     ADD CONSTRAINT exercise_types_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: exercises exercises_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercises
+    ADD CONSTRAINT exercises_pkey PRIMARY KEY (id);
 
 
 --
@@ -439,6 +566,30 @@ ALTER TABLE ONLY public.flipper_gates
 
 ALTER TABLE ONLY public.memberships
     ADD CONSTRAINT memberships_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: predefined_event_transitions predefined_event_transitions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_event_transitions
+    ADD CONSTRAINT predefined_event_transitions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: predefined_events predefined_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_events
+    ADD CONSTRAINT predefined_events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: predefined_scenarios predefined_scenarios_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_scenarios
+    ADD CONSTRAINT predefined_scenarios_pkey PRIMARY KEY (id);
 
 
 --
@@ -544,6 +695,20 @@ CREATE UNIQUE INDEX index_active_storage_variant_records_uniqueness ON public.ac
 
 
 --
+-- Name: index_custom_events_on_custom_scenario_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_custom_events_on_custom_scenario_id ON public.custom_events USING btree (custom_scenario_id);
+
+
+--
+-- Name: index_custom_events_on_team_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_custom_events_on_team_id ON public.custom_events USING btree (team_id);
+
+
+--
 -- Name: index_custom_scenarios_on_created_by_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -562,6 +727,62 @@ CREATE INDEX index_custom_scenarios_on_exercise_type_id ON public.custom_scenari
 --
 
 CREATE INDEX index_custom_scenarios_on_team_id ON public.custom_scenarios USING btree (team_id);
+
+
+--
+-- Name: index_exercise_objective_assignments_on_exercise_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercise_objective_assignments_on_exercise_id ON public.exercise_objective_assignments USING btree (exercise_id);
+
+
+--
+-- Name: index_exercise_objective_assignments_on_exercise_objective_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercise_objective_assignments_on_exercise_objective_id ON public.exercise_objective_assignments USING btree (exercise_objective_id);
+
+
+--
+-- Name: index_exercise_objective_assignments_on_team_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercise_objective_assignments_on_team_id ON public.exercise_objective_assignments USING btree (team_id);
+
+
+--
+-- Name: index_exercises_on_custom_scenario_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercises_on_custom_scenario_id ON public.exercises USING btree (custom_scenario_id);
+
+
+--
+-- Name: index_exercises_on_exercise_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercises_on_exercise_type_id ON public.exercises USING btree (exercise_type_id);
+
+
+--
+-- Name: index_exercises_on_owner_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercises_on_owner_id ON public.exercises USING btree (owner_id);
+
+
+--
+-- Name: index_exercises_on_predefined_scenario_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercises_on_predefined_scenario_id ON public.exercises USING btree (predefined_scenario_id);
+
+
+--
+-- Name: index_exercises_on_team_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_exercises_on_team_id ON public.exercises USING btree (team_id);
 
 
 --
@@ -590,6 +811,41 @@ CREATE INDEX index_memberships_on_team_id ON public.memberships USING btree (tea
 --
 
 CREATE UNIQUE INDEX index_memberships_on_user_id_and_team_id ON public.memberships USING btree (user_id, team_id);
+
+
+--
+-- Name: index_predefined_event_transitions_on_from_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_predefined_event_transitions_on_from_event_id ON public.predefined_event_transitions USING btree (from_event_id);
+
+
+--
+-- Name: index_predefined_event_transitions_on_to_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_predefined_event_transitions_on_to_event_id ON public.predefined_event_transitions USING btree (to_event_id);
+
+
+--
+-- Name: index_predefined_events_on_predefined_scenario_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_predefined_events_on_predefined_scenario_id ON public.predefined_events USING btree (predefined_scenario_id);
+
+
+--
+-- Name: index_predefined_scenarios_on_exercise_type_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_predefined_scenarios_on_exercise_type_id ON public.predefined_scenarios USING btree (exercise_type_id);
+
+
+--
+-- Name: index_predefined_scenarios_on_starting_scenario_event_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_predefined_scenarios_on_starting_scenario_event_id ON public.predefined_scenarios USING btree (starting_scenario_event_id);
 
 
 --
@@ -651,6 +907,54 @@ ALTER TABLE ONLY public.custom_scenarios
 
 
 --
+-- Name: predefined_event_transitions fk_rails_149b26ba74; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_event_transitions
+    ADD CONSTRAINT fk_rails_149b26ba74 FOREIGN KEY (from_event_id) REFERENCES public.predefined_events(id);
+
+
+--
+-- Name: predefined_scenarios fk_rails_28b06ed143; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_scenarios
+    ADD CONSTRAINT fk_rails_28b06ed143 FOREIGN KEY (starting_scenario_event_id) REFERENCES public.predefined_events(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: custom_events fk_rails_4259f728bf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_events
+    ADD CONSTRAINT fk_rails_4259f728bf FOREIGN KEY (custom_scenario_id) REFERENCES public.custom_scenarios(id);
+
+
+--
+-- Name: exercises fk_rails_4e8aa710e4; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercises
+    ADD CONSTRAINT fk_rails_4e8aa710e4 FOREIGN KEY (exercise_type_id) REFERENCES public.exercise_types(id);
+
+
+--
+-- Name: exercise_objective_assignments fk_rails_5a8001f88a; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_objective_assignments
+    ADD CONSTRAINT fk_rails_5a8001f88a FOREIGN KEY (exercise_id) REFERENCES public.exercises(id);
+
+
+--
+-- Name: exercises fk_rails_5db680993b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercises
+    ADD CONSTRAINT fk_rails_5db680993b FOREIGN KEY (owner_id) REFERENCES public.users(id);
+
+
+--
 -- Name: custom_scenarios fk_rails_63272d75ab; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -675,6 +979,30 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
+-- Name: exercise_objective_assignments fk_rails_75f8a3fefc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_objective_assignments
+    ADD CONSTRAINT fk_rails_75f8a3fefc FOREIGN KEY (team_id) REFERENCES public.teams(id);
+
+
+--
+-- Name: exercise_objective_assignments fk_rails_7f495efaaf; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercise_objective_assignments
+    ADD CONSTRAINT fk_rails_7f495efaaf FOREIGN KEY (exercise_objective_id) REFERENCES public.exercise_objectives(id);
+
+
+--
+-- Name: predefined_event_transitions fk_rails_89f41c689d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_event_transitions
+    ADD CONSTRAINT fk_rails_89f41c689d FOREIGN KEY (to_event_id) REFERENCES public.predefined_events(id);
+
+
+--
 -- Name: memberships fk_rails_99326fb65d; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -691,11 +1019,43 @@ ALTER TABLE ONLY public.active_storage_variant_records
 
 
 --
+-- Name: exercises fk_rails_998cb2fe1d; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercises
+    ADD CONSTRAINT fk_rails_998cb2fe1d FOREIGN KEY (custom_scenario_id) REFERENCES public.custom_scenarios(id);
+
+
+--
+-- Name: predefined_scenarios fk_rails_9c0651a577; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_scenarios
+    ADD CONSTRAINT fk_rails_9c0651a577 FOREIGN KEY (exercise_type_id) REFERENCES public.exercise_types(id);
+
+
+--
+-- Name: predefined_events fk_rails_9ef24234df; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.predefined_events
+    ADD CONSTRAINT fk_rails_9ef24234df FOREIGN KEY (predefined_scenario_id) REFERENCES public.predefined_scenarios(id);
+
+
+--
 -- Name: memberships fk_rails_ae2aedcfaf; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.memberships
     ADD CONSTRAINT fk_rails_ae2aedcfaf FOREIGN KEY (team_id) REFERENCES public.teams(id);
+
+
+--
+-- Name: exercises fk_rails_b175ef52e8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercises
+    ADD CONSTRAINT fk_rails_b175ef52e8 FOREIGN KEY (team_id) REFERENCES public.teams(id);
 
 
 --
@@ -715,12 +1075,35 @@ ALTER TABLE ONLY public.active_storage_attachments
 
 
 --
+-- Name: custom_events fk_rails_c440881dc9; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.custom_events
+    ADD CONSTRAINT fk_rails_c440881dc9 FOREIGN KEY (team_id) REFERENCES public.teams(id);
+
+
+--
+-- Name: exercises fk_rails_e7ff515962; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.exercises
+    ADD CONSTRAINT fk_rails_e7ff515962 FOREIGN KEY (predefined_scenario_id) REFERENCES public.predefined_scenarios(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
+('20250116134210'),
+('20250116123957'),
+('20250116114759'),
+('20250116113705'),
+('20250116113650'),
+('20250116113645'),
+('20250116113510'),
 ('20250111131427'),
 ('20250111123410'),
 ('20250110223000'),

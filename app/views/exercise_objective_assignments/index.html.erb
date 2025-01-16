@@ -1,0 +1,20 @@
+<% content_for :title, "Exercise objective assignments" %>
+
+<h1 class="page-heading">Exercise objective assignments</h1>
+
+<div class="items-list" id="exercise_objective_assignments">
+  <% @exercise_objective_assignments.each do |exercise_objective_assignment| %>
+    <div class="item-container">
+    <%= render exercise_objective_assignment %>
+    <div class="item-actions">
+      <%= link_to "Show this exercise objective assignment", exercise_objective_assignment, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New exercise objective assignment", new_exercise_objective_assignment_path, class: 'btn btn-primary' %>
+</div>

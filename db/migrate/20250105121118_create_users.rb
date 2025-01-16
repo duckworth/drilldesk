@@ -35,7 +35,9 @@ class CreateUsers < ActiveRecord::Migration[8.0]
 
       t.string :sys_roles, array: true, null: false, default: []
       t.jsonb :settings, null: false, default: {}
+
       t.uuid :last_team_id
+      t.datetime :disabled_at
 
       t.timestamps null: false
     end

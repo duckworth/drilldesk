@@ -1,0 +1,27 @@
+<div id="<%= dom_id exercise %>">
+  <dl class="item-dl">
+    <dt class="item-dt">Name</dt>
+    <dd class="item-dd"><%= exercise.name %></dd>
+
+    <dt class="item-dt">Purpose</dt>
+    <dd class="item-dd"><%= exercise.purpose %></dd>
+
+    <dt class="item-dt">Status</dt>
+    <dd class="item-dd"><%= exercise.status %></dd>
+
+    <dt class="item-dt">Exercise type</dt>
+    <dd class="item-dd"><%= exercise.exercise_type.name %></dd>
+
+    <dt class="item-dt">Custom scenario</dt>
+    <dd class="item-dd"><%= exercise.custom_scenario_id %></dd>
+
+    <dt class="item-dt">Predefined scenario</dt>
+    <dd class="item-dd"><%= exercise.predefined_scenario_id %></dd>
+
+    <dt class="item-dt">Exercise date</dt>
+    <dd class="item-dd"><%= exercise.exercise_date %></dd>
+
+    <dt class="item-dt">Owner</dt>
+    <dd class="item-dd"><%= exercise.owner&.name %></dd>
+  </dl>
+</div>

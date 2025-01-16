@@ -1,0 +1,52 @@
+<%= form_with(model: exercise) do |form| %>
+	<div class="form-container">
+		<% if exercise.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(exercise.errors.count, "error") %> prohibited this exercise
+				from being saved:</h2>
+
+			<ul>
+				<% exercise.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :name %>
+		</div>
+
+		<div class="form-group">
+				<%= form.textarea :purpose %>
+		</div>
+
+		<div class="form-group">
+			<%= form.select :exercise_type_id, ExerciseType.enabled.pluck(:name, :id), { prompt: "Select an Exercise Type" } %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :custom_scenario_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :predefined_scenario_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.datetime_field :exercise_date %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :context_data %>
+		</div>
+
+		<div class="form-group">
+			<%= form.select :owner_id, Team.users.enabled.pluck(:name, :id), { prompt: "Select an Owner" } %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

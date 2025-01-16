@@ -4,8 +4,9 @@ class CreatePredefinedScenarios < ActiveRecord::Migration[8.0]
       t.string :name
       t.text :description
       t.boolean :enabled, null: false, default: true
-      t.references :exercise_type, null: false, foreign_key: true, type: :uuid
-      t.references :starting_scenario_event, null: false, foreign_key: { to_table: :predefined_events }, type: :uuid
+      t.references :exercise_type, null: false, foreign_key: true, type: :bigint
+      # moved circular reference to separate migration
+      # t.references :starting_scenario_event, null: true, foreign_key: { to_table: :predefined_events, deferrable: :deferredi }, type: :uuid
 
       t.timestamps
     end

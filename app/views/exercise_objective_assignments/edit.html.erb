@@ -1,0 +1,12 @@
+<% content_for :title, "Editing exercise objective assignment" %>
+
+<h1 class="page-heading">Editing exercise objective assignment</h1>
+
+<%= render "form", exercise_objective_assignment: @exercise_objective_assignment %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Show this exercise objective assignment", @exercise_objective_assignment, class: "btn btn-primary" %>
+  <%= link_to "Back to exercise objective assignments", exercise_objective_assignments_path, class: "btn btn-alt" %>
+</div>

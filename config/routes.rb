@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :exercise_objective_assignments
+  resources :exercises
   resources :custom_events
   resources :predefined_event_transitions
   resources :predefined_events

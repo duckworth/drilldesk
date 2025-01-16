@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @exercise %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this exercise", edit_exercise_path(@exercise), class: "btn btn-primary" %>
+  <%= link_to "Back to exercises", exercises_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this exercise", @exercise, method: :delete, class: "btn btn-alt" %>
+</div>

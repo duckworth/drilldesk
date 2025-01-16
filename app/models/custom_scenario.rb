@@ -3,10 +3,12 @@ class CustomScenario < ApplicationRecord
   belongs_to :exercise_type
   belongs_to :created_by, class_name: "User"
   has_one_attached :source_file
-  before_validation :set_created_by, on: :create
+
   acts_as_tenant(:team)
   default_scope { order(created_at: :desc) }
   has_paper_trail
+
+  before_validation :set_created_by, on: :create
 
   private
 

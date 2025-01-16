@@ -15,4 +15,13 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3, maximum: 100 }
   validates :sys_roles, intersection: { within: SYS_ROLES, message: I18n.t("invalid_system_role") }
   validates :email, email: true, unless: ->(u) { u.skip_valid_email }
+
+  scope :enabled, -> { where(disabled_at: nil) }
+  def active_for_authentication?
+    super && disabled_at.nil?
+  end
+
+  def inactive_message
+    disabled_at? ? :account_disabled : super
+  end
 end

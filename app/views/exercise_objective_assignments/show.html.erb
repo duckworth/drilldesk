@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @exercise_objective_assignment %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this exercise objective assignment", edit_exercise_objective_assignment_path(@exercise_objective_assignment), class: "btn btn-primary" %>
+  <%= link_to "Back to exercise objective assignments", exercise_objective_assignments_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this exercise objective assignment", @exercise_objective_assignment, method: :delete, class: "btn btn-alt" %>
+</div>

@@ -1,0 +1,2 @@
+module ExerciseObjectiveAssignmentsHelper
+end
