@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @predefined_scenario %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this predefined scenario", edit_predefined_scenario_path(@predefined_scenario), class: "btn btn-primary" %>
+  <%= link_to "Back to predefined scenarios", predefined_scenarios_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this predefined scenario", @predefined_scenario, method: :delete, class: "btn btn-alt" %>
+</div>

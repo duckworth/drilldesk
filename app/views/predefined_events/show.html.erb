@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @predefined_event %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this predefined event", edit_predefined_event_path(@predefined_event), class: "btn btn-primary" %>
+  <%= link_to "Back to predefined events", predefined_events_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this predefined event", @predefined_event, method: :delete, class: "btn btn-alt" %>
+</div>

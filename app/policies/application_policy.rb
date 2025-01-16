@@ -70,6 +70,10 @@ class ApplicationPolicy
     [ User::Roles::Role::OWNER, User::Roles::Role::MANAGER, User::Roles::Role::PARTICIPANT, User::Roles::Role::VIEWER ].include?(membership&.role)
   end
 
+  def sys_user?
+    user.sys_roles.any? { |role| User::Roles::SysRole.constants.map { |c| User::Roles::SysRole.const_get(c) }.include?(role) }
+  end
+
   #
   # Policy Scope
   #

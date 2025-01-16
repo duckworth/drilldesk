@@ -1,0 +1,20 @@
+<% content_for :title, "Predefined events" %>
+
+<h1 class="page-heading">Predefined events</h1>
+
+<div class="items-list" id="predefined_events">
+  <% @predefined_events.each do |predefined_event| %>
+    <div class="item-container">
+    <%= render predefined_event %>
+    <div class="item-actions">
+      <%= link_to "Show this predefined event", predefined_event, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New predefined event", new_predefined_event_path, class: 'btn btn-primary' %>
+</div>

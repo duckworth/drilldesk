@@ -1,0 +1,32 @@
+<%= form_with(model: predefined_event_transition) do |form| %>
+	<div class="form-container">
+		<% if predefined_event_transition.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(predefined_event_transition.errors.count, "error") %> prohibited this predefined_event_transition
+				from being saved:</h2>
+
+			<ul>
+				<% predefined_event_transition.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :from_event_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :to_event_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :condition %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

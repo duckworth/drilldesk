@@ -1,0 +1,20 @@
+<% content_for :title, "Custom events" %>
+
+<h1 class="page-heading">Custom events</h1>
+
+<div class="items-list" id="custom_events">
+  <% @custom_events.each do |custom_event| %>
+    <div class="item-container">
+    <%= render custom_event %>
+    <div class="item-actions">
+      <%= link_to "Show this custom event", custom_event, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New custom event", new_custom_event_path, class: 'btn btn-primary' %>
+</div>

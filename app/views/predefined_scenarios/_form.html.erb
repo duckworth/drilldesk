@@ -1,0 +1,36 @@
+<%= form_with(model: predefined_scenario) do |form| %>
+	<div class="form-container">
+		<% if predefined_scenario.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(predefined_scenario.errors.count, "error") %> prohibited this predefined_scenario
+				from being saved:</h2>
+
+			<ul>
+				<% predefined_scenario.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :name %>
+		</div>
+
+		<div class="form-group">
+				<%= form.textarea :description %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :exercise_type_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :starting_scenario_event_id %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

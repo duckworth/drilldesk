@@ -1,0 +1,2 @@
+class PredefinedEventTransitionPolicy < PredefinedPolicy
+end

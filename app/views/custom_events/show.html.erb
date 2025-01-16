@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @custom_event %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this custom event", edit_custom_event_path(@custom_event), class: "btn btn-primary" %>
+  <%= link_to "Back to custom events", custom_events_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this custom event", @custom_event, method: :delete, class: "btn btn-alt" %>
+</div>

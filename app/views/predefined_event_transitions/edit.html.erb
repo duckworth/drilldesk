@@ -1,0 +1,12 @@
+<% content_for :title, "Editing predefined event transition" %>
+
+<h1 class="page-heading">Editing predefined event transition</h1>
+
+<%= render "form", predefined_event_transition: @predefined_event_transition %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Show this predefined event transition", @predefined_event_transition, class: "btn btn-primary" %>
+  <%= link_to "Back to predefined event transitions", predefined_event_transitions_path, class: "btn btn-alt" %>
+</div>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :custom_events
+  resources :predefined_event_transitions
+  resources :predefined_events
+  resources :predefined_scenarios
   devise_for :users, controllers: { registrations: "users/registrations" }
   ActiveAdmin.routes(self)
 

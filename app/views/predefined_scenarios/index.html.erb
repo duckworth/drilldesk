@@ -1,0 +1,20 @@
+<% content_for :title, "Predefined scenarios" %>
+
+<h1 class="page-heading">Predefined scenarios</h1>
+
+<div class="items-list" id="predefined_scenarios">
+  <% @predefined_scenarios.each do |predefined_scenario| %>
+    <div class="item-container">
+    <%= render predefined_scenario %>
+    <div class="item-actions">
+      <%= link_to "Show this predefined scenario", predefined_scenario, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New predefined scenario", new_predefined_scenario_path, class: 'btn btn-primary' %>
+</div>

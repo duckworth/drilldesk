@@ -3,7 +3,7 @@ class CreateExerciseTypes < ActiveRecord::Migration[8.0]
     create_table :exercise_types, id: :bigint do |t|
       t.string :name
       t.text :description
-      t.boolean :enabled
+      t.boolean :enabled, null: false, default: true
 
       t.timestamps
     end

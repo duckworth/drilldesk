@@ -1,0 +1,2 @@
+class PredefinedScenarioPolicy < PredefinedPolicy
+end

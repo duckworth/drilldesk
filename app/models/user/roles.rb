@@ -4,6 +4,7 @@ class User
   module Roles
     module SysRole
       SYS_ADMIN = "sys_admin"
+      SYS_SUPPORT = "sys_support"
     end
 
     module Role

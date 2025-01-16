@@ -1,0 +1,11 @@
+<% content_for :title, "New predefined scenario" %>
+
+<h1 class="page-heading">New predefined scenario</h1>
+
+<%= render "form", predefined_scenario: @predefined_scenario %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Back to predefined scenarios", predefined_scenarios_path, class: "btn btn-alt" %>
+</div>

@@ -1,0 +1,11 @@
+<% content_for :title, "New custom event" %>
+
+<h1 class="page-heading">New custom event</h1>
+
+<%= render "form", custom_event: @custom_event %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Back to custom events", custom_events_path, class: "btn btn-alt" %>
+</div>

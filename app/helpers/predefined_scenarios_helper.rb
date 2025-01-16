@@ -1,0 +1,2 @@
+module PredefinedScenariosHelper
+end

@@ -1,0 +1,20 @@
+<% content_for :title, "Predefined event transitions" %>
+
+<h1 class="page-heading">Predefined event transitions</h1>
+
+<div class="items-list" id="predefined_event_transitions">
+  <% @predefined_event_transitions.each do |predefined_event_transition| %>
+    <div class="item-container">
+    <%= render predefined_event_transition %>
+    <div class="item-actions">
+      <%= link_to "Show this predefined event transition", predefined_event_transition, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New predefined event transition", new_predefined_event_transition_path, class: 'btn btn-primary' %>
+</div>
