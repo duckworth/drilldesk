@@ -10,14 +10,14 @@ if email.present? && password.present?
   user = User.find_or_initialize_by(email: email)
 
   if user.new_record?
-    user.first_name = email.split('@').first if user.first_name.blank? # Fallback for name
+    user.name = email.split('@').first if user.name.blank? # Fallback for name
     user.password = password
     user.password_confirmation = password
     user.sys_roles = [ User::Roles::SysRole::SYS_ADMIN ]
     user.confirmed_at = Time.current # By default, mark the user as confirmed if using Devise's Confirmable
 
     if user.save
-      puts "Seed user created! Email: #{email}, Name: #{user.first_name}"
+      puts "Seed user created! Email: #{email}, Name: #{user.name}"
     else
       puts "Failed to create seed user. Errors: #{user.errors.full_messages.join(', ')}"
     end

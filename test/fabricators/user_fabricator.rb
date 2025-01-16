@@ -1,6 +1,5 @@
 Fabricator(:user_base, class_name: "User") do
-  first_name { Faker::Name.first_name }
-  last_name { Faker::Name.last_name }
+  name { Faker::Name.name }
   email { Faker::Internet.unique.email(domain: "drilldesk.com") }
   password { Faker::Internet.password(min_length: 8, max_length: 12, mix_case: true, special_characters: true) }
   password_confirmation { |attrs| attrs[:password] }
