@@ -1,0 +1,16 @@
+<div id="<%= dom_id exercise_artifact %>">
+  <dl class="item-dl">
+    <dt class="item-dt">Team</dt>
+    <dd class="item-dd"><%= exercise_artifact.team_id %></dd>
+
+    <dt class="item-dt">Exercise</dt>
+    <dd class="item-dd"><%= exercise_artifact.exercise_id %></dd>
+
+    <dt class="item-dt">Artifact type</dt>
+    <dd class="item-dd"><%= exercise_artifact.artifact_type %></dd>
+
+    <dt class="item-dt">File</dt>
+    <%= link_to exercise_artifact.file.filename, exercise_artifact.file, class: "btn btn-alt" if exercise_artifact.file.attached? %>
+
+  </dl>
+</div>

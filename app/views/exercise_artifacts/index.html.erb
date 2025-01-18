@@ -1,0 +1,20 @@
+<% content_for :title, "Exercise artifacts" %>
+
+<h1 class="page-heading">Exercise artifacts</h1>
+
+<div class="items-list" id="exercise_artifacts">
+  <% @exercise_artifacts.each do |exercise_artifact| %>
+    <div class="item-container">
+    <%= render exercise_artifact %>
+    <div class="item-actions">
+      <%= link_to "Show this exercise artifact", exercise_artifact, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New exercise artifact", new_exercise_artifact_path, class: 'btn btn-primary' %>
+</div>

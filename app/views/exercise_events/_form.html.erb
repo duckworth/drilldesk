@@ -1,0 +1,48 @@
+<%= form_with(model: exercise_event) do |form| %>
+	<div class="form-container">
+		<% if exercise_event.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(exercise_event.errors.count, "error") %> prohibited this exercise_event
+				from being saved:</h2>
+
+			<ul>
+				<% exercise_event.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :team_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :exercise_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :predefined_event_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :custom_event_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.datetime_field :triggered_at %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :status %>
+		</div>
+
+		<div class="form-group">
+				<%= form.number_field :relative_event_time %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

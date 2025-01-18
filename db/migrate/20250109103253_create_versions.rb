@@ -2,7 +2,7 @@
 # All other migrations PT provides are optional.
 class CreateVersions < ActiveRecord::Migration[8.0]
   def change
-    create_table :versions, id: :uuid do |t|
+    create_table :versions, id: :uuid, default: 'uuid_generate_v8()' do |t|
       t.string :item_type, null: false
       t.string :item_id, null: false
       t.string :event, null: false

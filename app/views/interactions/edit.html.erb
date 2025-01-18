@@ -1,0 +1,12 @@
+<% content_for :title, "Editing interaction" %>
+
+<h1 class="page-heading">Editing interaction</h1>
+
+<%= render "form", interaction: @interaction %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Show this interaction", @interaction, class: "btn btn-primary" %>
+  <%= link_to "Back to interactions", interactions_path, class: "btn btn-alt" %>
+</div>

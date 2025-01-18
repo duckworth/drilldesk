@@ -1,0 +1,12 @@
+<% content_for :title, "Editing exercise artifact" %>
+
+<h1 class="page-heading">Editing exercise artifact</h1>
+
+<%= render "form", exercise_artifact: @exercise_artifact %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Show this exercise artifact", @exercise_artifact, class: "btn btn-primary" %>
+  <%= link_to "Back to exercise artifacts", exercise_artifacts_path, class: "btn btn-alt" %>
+</div>

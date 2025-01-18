@@ -1,0 +1,36 @@
+<%= form_with(model: exercise_artifact) do |form| %>
+	<div class="form-container">
+		<% if exercise_artifact.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(exercise_artifact.errors.count, "error") %> prohibited this exercise_artifact
+				from being saved:</h2>
+
+			<ul>
+				<% exercise_artifact.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :team_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :exercise_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :artifact_type %>
+		</div>
+
+		<div class="form-group">
+				<%= form.file_field :file %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :exercise_artifacts
+  resources :interactions
+  resources :exercise_events
+  resources :exercise_participants
   resources :exercise_objective_assignments
   resources :exercises
   resources :custom_events

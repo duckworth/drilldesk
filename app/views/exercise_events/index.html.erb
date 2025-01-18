@@ -1,0 +1,20 @@
+<% content_for :title, "Exercise events" %>
+
+<h1 class="page-heading">Exercise events</h1>
+
+<div class="items-list" id="exercise_events">
+  <% @exercise_events.each do |exercise_event| %>
+    <div class="item-container">
+    <%= render exercise_event %>
+    <div class="item-actions">
+      <%= link_to "Show this exercise event", exercise_event, class: 'link' %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<div class="pagination">
+  <%== pagy_nav(@pagy) %>
+</div>
+<div class="actions">
+  <%= link_to "New exercise event", new_exercise_event_path, class: 'btn btn-primary' %>
+</div>

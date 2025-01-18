@@ -1,4 +1,4 @@
-class ExerciseObjectivesController < AuthenticatedController
+class ExerciseObjectivesController < BaseTeamController
   before_action :set_exercise_objective, only: %i[ show ]
 
   # GET /exercise_objectives

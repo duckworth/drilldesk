@@ -1,6 +1,6 @@
 class CreateCustomEvents < ActiveRecord::Migration[8.0]
   def change
-    create_table :custom_events, id: :uuid do |t|
+    create_table :custom_events, id: :uuid, default: 'uuid_generate_v8()' do |t|
       t.references :team, null: false, foreign_key: true, type: :uuid
       t.string :name
       t.text :description

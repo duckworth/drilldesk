@@ -1,6 +1,5 @@
-class CustomEvent < ApplicationRecord
+class CustomEvent < Event
   belongs_to :team
-  belongs_to :custom_scenario
   acts_as_tenant(:team)
-  has_paper_trail
+  belongs_to :custom_scenario
 end

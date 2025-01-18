@@ -1,0 +1,52 @@
+<%= form_with(model: interaction) do |form| %>
+	<div class="form-container">
+		<% if interaction.errors.any? %>
+		<div class="error-messages">
+			<h2><%= pluralize(interaction.errors.count, "error") %> prohibited this interaction
+				from being saved:</h2>
+
+			<ul>
+				<% interaction.errors.each do |error| %>
+				<li><%= error.full_message %></li>
+				<% end %>
+			</ul>
+		</div>
+		<% end %>
+
+		<div class="form-group">
+				<%= form.text_field :team_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :exercise_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :exercise_event_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :interaction_type %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :user_id %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :user_input %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :ai_response %>
+		</div>
+
+		<div class="form-group">
+				<%= form.text_field :response_confidence %>
+		</div>
+
+		<div class="actions">
+	    <%= form.submit class: 'btn btn-primary' %>
+	  </div>
+	</div>
+<% end %>

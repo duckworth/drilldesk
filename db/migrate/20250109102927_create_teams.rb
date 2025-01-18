@@ -1,6 +1,6 @@
 class CreateTeams < ActiveRecord::Migration[8.0]
   def change
-    create_table :teams, id: :uuid do |t|
+    create_table :teams, id: :uuid, default: 'uuid_generate_v8()' do |t|
       t.string :name, null: false
       t.string :slug, null: false
       t.string :status, null: false, default: :active
@@ -8,6 +8,7 @@ class CreateTeams < ActiveRecord::Migration[8.0]
       t.string :timezone, null: false, default: 'America/New_York'
       t.datetime :disabled_at
       t.datetime :suspended_at
+      t.jsonb :settings
       t.timestamps
       t.index :slug, unique: true
     end

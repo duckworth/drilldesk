@@ -1,0 +1,12 @@
+<% content_for :title, "Editing exercise participant" %>
+
+<h1 class="page-heading">Editing exercise participant</h1>
+
+<%= render "form", exercise_participant: @exercise_participant %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Show this exercise participant", @exercise_participant, class: "btn btn-primary" %>
+  <%= link_to "Back to exercise participants", exercise_participants_path, class: "btn btn-alt" %>
+</div>

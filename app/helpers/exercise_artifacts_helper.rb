@@ -1,0 +1,2 @@
+module ExerciseArtifactsHelper
+end

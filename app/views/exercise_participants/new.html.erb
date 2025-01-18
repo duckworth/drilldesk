@@ -1,0 +1,11 @@
+<% content_for :title, "New exercise participant" %>
+
+<h1 class="page-heading">New exercise participant</h1>
+
+<%= render "form", exercise_participant: @exercise_participant %>
+
+<br>
+
+<div class="actions">
+  <%= link_to "Back to exercise participants", exercise_participants_path, class: "btn btn-alt" %>
+</div>

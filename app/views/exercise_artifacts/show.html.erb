@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @exercise_artifact %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this exercise artifact", edit_exercise_artifact_path(@exercise_artifact), class: "btn btn-primary" %>
+  <%= link_to "Back to exercise artifacts", exercise_artifacts_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this exercise artifact", @exercise_artifact, method: :delete, class: "btn btn-alt" %>
+</div>

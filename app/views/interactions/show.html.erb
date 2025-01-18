@@ -1,0 +1,9 @@
+<div class="show-container">
+<%= render @interaction %>
+</div>
+<div class="actions">
+  <%= link_to "Edit this interaction", edit_interaction_path(@interaction), class: "btn btn-primary" %>
+  <%= link_to "Back to interactions", interactions_path, class: "btn btn-alt" %>
+
+  <%= button_to "Destroy this interaction", @interaction, method: :delete, class: "btn btn-alt" %>
+</div>

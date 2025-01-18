@@ -1,9 +1,9 @@
 Fabricator(:custom_scenario) do
   team
-  name          "MyString"
-  description   "MyText"
+  name { "#{Faker::Hacker.verb.capitalize} #{Faker::Hipster.word.capitalize}" }
+  description { Faker::SiliconValley.quote }
+  source_text { Faker::Lorem.sentence }
   exercise_type
-  source_file   nil
-  source_text   "MyText"
+  source_file nil
   created_by { |attrs| attrs[:team]&.users&.first }
 end

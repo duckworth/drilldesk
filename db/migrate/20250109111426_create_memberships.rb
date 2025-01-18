@@ -1,6 +1,6 @@
 class CreateMemberships < ActiveRecord::Migration[8.0]
   def change
-    create_table :memberships, id: :uuid do |t|
+    create_table :memberships, id: :uuid, default: 'uuid_generate_v8()' do |t|
       t.references :team, null: false, foreign_key: true, type: :uuid, index: true
       t.references :user, null: false, foreign_key: true, type: :uuid, index: false
       t.string :role, null: false, default: 'owner'

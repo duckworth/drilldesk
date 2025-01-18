@@ -2,7 +2,7 @@
 
 class CreateUsers < ActiveRecord::Migration[8.0]
   def change
-    create_table :users, id: :uuid do |t|
+    create_table :users, id: :uuid, default: 'uuid_generate_v8()' do |t|
       ## Database authenticatable
       t.string :email, null: false, default: ""
       t.string :name, null: false, default: ""
@@ -34,7 +34,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       t.datetime :locked_at
 
       t.string :sys_roles, array: true, null: false, default: []
-      t.jsonb :settings, null: false, default: {}
+      t.jsonb :settings
 
       t.uuid :last_team_id
       t.datetime :disabled_at
