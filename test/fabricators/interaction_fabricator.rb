@@ -1,5 +1,5 @@
 Fabricator(:interaction) do
-  team                nil
+  team { Current.team || Fabricate(:team) }
   exercise            nil
   exercise_event      nil
   interaction_type    "MyString"

@@ -1,6 +1,6 @@
 Fabricator(:custom_event) do
-  team             nil
-  name             "MyString"
+  team { Current.team || Fabricate(:team) }
+  name { FakerHelper.generate_event_name }
   description      "MyText"
   custom_scenario  nil
   name             "MyString"

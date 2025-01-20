@@ -3,7 +3,7 @@ class Exercise
     extend ActiveSupport::Concern
 
     included do
-      includes AASM
+      include AASM
       aasm column: :status do
         state :not_started, initial: true
         state :in_progress

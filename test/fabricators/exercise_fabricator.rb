@@ -1,11 +1,20 @@
 Fabricator(:exercise) do
-  team                nil
-  name                "MyString"
-  purpose             "MyText"
-  status              "MyString"
-  exercise_type       nil
-  custom_scenario     nil
-  predefined_scenario nil
-  exercise_date       "2025-01-16 07:39:57"
-  context_data        ""
+  team { Current.team || Fabricate(:team) }
+  name { "#{Faker::Hacker.verb.capitalize} #{Faker::Hipster.word.capitalize}" }
+  purpose { "#{Faker::Hacker.ingverb} the #{Faker::Hacker.adjective} #{Faker::Hacker.noun}" }
+  exercise_type
+end
+
+Fabricator(:exercise_with_assigned_objectives, from: :exercise) do
+  after_build do |exercise|
+    exercise.exercise_objective_assignments = Fabricate.times(rand(1..3), :exercise_objective_assignment, exercise: exercise)
+  end
+end
+
+Fabricator(:custom_exercise, from: :exercise) do
+  scenario { Fabricate(:custom_scenario) }
+end
+
+Fabricator(:predefined_exercise, from: :exercise) do
+  scenario { Fabricate(:predefined_scenario) }
 end

@@ -3,7 +3,7 @@ class Exercise < ApplicationRecord
   belongs_to :team
   belongs_to :exercise_type
   belongs_to :scenario, polymorphic: true
-  belongs_to :set_created_by, class_name: "User", optional: true
+  belongs_to :created_by, class_name: "User", optional: true
   has_many :exercise_objective_assignments, dependent: :destroy
   has_many :exercise_objectives, through: :exercise_objective_assignments
   has_many :exercise_participants, dependent: :destroy
@@ -14,7 +14,7 @@ class Exercise < ApplicationRecord
   default_scope { order(created_at: :desc) }
   has_paper_trail
 
-  before_validation :set_owner, on: :create
+  before_validation :set_created_by, on: :create
   validates :scenario, presence: true
   validates :name, presence: true, length: { maximum: 255 }
   validates :purpose, length: { maximum: 2000 }

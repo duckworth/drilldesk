@@ -1,6 +1,6 @@
 Fabricator(:exercise_objective_assignment) do
-  team               nil
-  exercise           nil
-  exercise_objective nil
-  priority           1
+  team { Current.team || Fabricate(:team) }
+  exercise
+  exercise_objective
+  priority { rand(1..100) }
 end

@@ -1,5 +1,5 @@
 Fabricator(:exercise_participant) do
-  team     nil
+  team { Current.team || Fabricate(:team) }
   exercise nil
   name     "MyString"
   user     nil

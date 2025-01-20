@@ -5,7 +5,7 @@ class CustomScenario < Scenario
   has_many :custom_events
   has_many :exercises
   acts_as_tenant(:team)
-  default_scope { order(created_at: :desc) }
+  default_scope { order(id: :desc) }
   has_paper_trail
 
   before_validation :set_created_by, on: :create

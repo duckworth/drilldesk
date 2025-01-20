@@ -1,6 +1,6 @@
 Fabricator(:predefined_event) do
-  name                "MyString"
-  description         "MyText"
-  predefined_scenario nil
-  trigger_conditions  ""
+  name { FakerHelper.generate_event_name }
+  description { Faker::TvShows::SiliconValley.quote }
+  predefined_scenario
+  trigger_conditions { {} }
 end

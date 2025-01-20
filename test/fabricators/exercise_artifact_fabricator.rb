@@ -1,5 +1,5 @@
 Fabricator(:exercise_artifact) do
-  team          nil
+  team { Current.team || Fabricate(:team) }
   exercise      nil
   artifact_type "MyString"
   file          nil

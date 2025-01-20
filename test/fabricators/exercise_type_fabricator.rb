@@ -1,5 +1,12 @@
+require Rails.root.join("db/seeds/common/exercise_types.rb")
+
 Fabricator(:exercise_type) do
-  name { "#{Faker::Hacker.ingverb} type" }
-  description { Faker::Hacker.say_something_smart }
-  enabled true
+  transient :exercise_data
+
+  exercise_data { SeedData::ExerciseTypes::LIST.sample }
+
+  name { |attrs| attrs[:exercise_data][:name] }
+  description { |attrs| attrs[:exercise_data][:description] }
+
+  enabled { true }
 end
