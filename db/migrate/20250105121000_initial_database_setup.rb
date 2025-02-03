@@ -1,5 +1,8 @@
 class InitialDatabaseSetup < ActiveRecord::Migration[8.0]
   def up
+    execute "CREATE EXTENSION IF NOT EXISTS vector;"
+    enable_extension 'vector'
+
     execute <<-SQL
       -- v8 with microsecond precision from https://gist.github.com/kjmph/5bd772b2c2df145aa645b837da7eca74
       -- Generate a custom UUID v8 with microsecond precision
@@ -39,5 +42,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration[8.0]
     execute <<-SQL
       DROP FUNCTION IF EXISTS uuid_generate_v8();
     SQL
+
+    disable_extension 'vector'
   end
 end
