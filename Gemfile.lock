@@ -394,7 +394,7 @@ GEM
       actionpack (>= 5.2)
       activemodel (>= 5.2)
     simpleidn (0.2.3)
-    solid_cable (3.0.5)
+    solid_cable (3.0.7)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
