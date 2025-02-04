@@ -12,9 +12,9 @@ Fabricator(:exercise_with_assigned_objectives, from: :exercise) do
 end
 
 Fabricator(:custom_exercise, from: :exercise) do
-  scenario { Fabricate(:custom_scenario) }
+  scenario { Fabricate(:custom_scenario_with_events) }
 end
 
 Fabricator(:predefined_exercise, from: :exercise) do
-  scenario { Fabricate(:predefined_scenario) }
+  scenario { Fabricate(:predefined_scenario_with_events) }
 end

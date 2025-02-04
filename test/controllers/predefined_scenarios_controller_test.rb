@@ -2,10 +2,14 @@ require "test_helper"
 
 class PredefinedScenariosControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @predefined_scenario = Fabricate(:predefined_scenario)
+    @user, @team = user_with_team
+    @user.sys_roles << User::Roles::SysRole::SYS_ADMIN
+    sign_in @user
+    @predefined_scenario = Fabricate(:predefined_scenario_with_events)
   end
 
   test "should get index" do
+    @user.update(sys_roles: [])
     get predefined_scenarios_url
     assert_response :success
   end
@@ -24,6 +28,7 @@ class PredefinedScenariosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show predefined_scenario" do
+    @user.update(sys_roles: [])
     get predefined_scenario_url(@predefined_scenario)
     assert_response :success
   end

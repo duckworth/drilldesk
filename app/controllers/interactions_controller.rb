@@ -53,6 +53,6 @@ class InteractionsController < AuthenticatedController
 
     # Only allow a list of trusted parameters through.
     def interaction_params
-      params.expect(interaction: [ :team_id, :exercise_id, :exercise_event_id, :interaction_type, :user_id, :user_input, :ai_response, :response_confidence ])
+      params.expect(interaction: [ :exercise_id, :exercise_event_id, :interaction_type, :user_id, :user_input, :ai_response, :response_confidence ])
     end
 end

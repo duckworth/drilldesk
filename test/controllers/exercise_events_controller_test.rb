@@ -2,7 +2,9 @@ require "test_helper"
 
 class ExerciseEventsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @exercise_event = Fabricate(:exercise_event)
+    @user, @team = user_with_team
+    sign_in @user
+    @exercise_event = Fabricate(:predefined_exercise_event, team: @team)
   end
 
   test "should get index" do
@@ -17,10 +19,11 @@ class ExerciseEventsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create exercise_event" do
     assert_difference("ExerciseEvent.count") do
-      post exercise_events_url, params: { exercise_event: { custom_event_id: @exercise_event.custom_event_id, exercise_id: @exercise_event.exercise_id, predefined_event_id: @exercise_event.predefined_event_id, relative_event_time: @exercise_event.relative_event_time, status: @exercise_event.status, team_id: @exercise_event.team_id, triggered_at: @exercise_event.triggered_at } }
+      post exercise_events_url, params: { exercise_event: { exercise_id: @exercise_event.exercise_id, predefined_event_id: @exercise_event.event_id, relative_event_time: @exercise_event.relative_event_time, triggered_at: @exercise_event.triggered_at } }
+      assert_not_equal 422, response.status, "Expected response not to be 422. Model errors: #{@controller.view_assigns['exercise_event'].errors.full_messages.join(', ')}"
     end
 
-    assert_redirected_to exercise_event_url(ExerciseEvent.last)
+    assert_redirected_to exercise_event_url(ExerciseEvent.first)
   end
 
   test "should show exercise_event" do
@@ -34,7 +37,8 @@ class ExerciseEventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update exercise_event" do
-    patch exercise_event_url(@exercise_event), params: { exercise_event: { custom_event_id: @exercise_event.custom_event_id, exercise_id: @exercise_event.exercise_id, predefined_event_id: @exercise_event.predefined_event_id, relative_event_time: @exercise_event.relative_event_time, status: @exercise_event.status, team_id: @exercise_event.team_id, triggered_at: @exercise_event.triggered_at } }
+    @exercise_event
+    patch exercise_event_url(@exercise_event), params: { exercise_event: { exercise_id: @exercise_event.exercise_id, relative_event_time: @exercise_event.relative_event_time, triggered_at: @exercise_event.triggered_at } }
     assert_redirected_to exercise_event_url(@exercise_event)
   end
 

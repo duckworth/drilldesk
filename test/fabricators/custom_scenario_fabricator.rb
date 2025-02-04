@@ -7,3 +7,11 @@ Fabricator(:custom_scenario) do
   source_file nil
   created_by { |attrs| attrs[:team]&.users&.first || Fabricate(:user_with_team, team: attrs[:team]) }
 end
+
+Fabricator(:custom_scenario_with_events, from: :custom_scenario) do
+  after_build do |scenario|
+    3.times do |i|
+      Fabricate(:custom_event, custom_scenario: scenario, sequence_order: i + 1)
+    end
+  end
+end

@@ -42,7 +42,7 @@
 		</div>
 
 		<div class="form-group">
-			<%= form.select :owner_id, Team.users.enabled.pluck(:name, :id), { prompt: "Select an Owner" } %>
+			<%= form.select :owner_id, Current.team.users.enabled.pluck(:name, :id), { prompt: "Select an Owner" } %>
 		</div>
 
 		<div class="actions">

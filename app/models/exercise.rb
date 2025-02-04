@@ -18,10 +18,17 @@ class Exercise < ApplicationRecord
   validates :scenario, presence: true
   validates :name, presence: true, length: { maximum: 255 }
   validates :purpose, length: { maximum: 2000 }
+  validate :scenario_immutable, on: :update
 
   private
 
   def set_created_by
     self.created_by = Current.user if new_record? && Current.user.present?
+  end
+
+  def scenario_immutable
+    if scenario_id_changed? || scenario_type_changed?
+      errors.add(:scenario, "cannot be changed once the exercise is created")
+    end
   end
 end

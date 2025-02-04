@@ -9,7 +9,7 @@ class CustomScenarioTest < ActiveSupport::TestCase
     Fabricate.times(10, :custom_scenario)
 
     custom_scenarios = CustomScenario.all
-    assert_equal custom_scenarios.pluck(:created_at), custom_scenarios.pluck(:created_at).sort
-    assert_equal custom_scenarios.pluck(:created_at), custom_scenarios.pluck(:created_at).reverse.sort
+    assert_equal custom_scenarios.pluck(:id), custom_scenarios.order(created_at: :desc).pluck(:id)
+    assert_equal custom_scenarios.pluck(:created_at), custom_scenarios.pluck(:created_at).sort.reverse
   end
 end

@@ -2,6 +2,8 @@ require "test_helper"
 
 class InteractionsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user, @team = user_with_team
+    sign_in @user
     @interaction = Fabricate(:interaction)
   end
 

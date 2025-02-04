@@ -7,6 +7,7 @@ class Team < ApplicationRecord
 
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
+  has_many :custom_scenarios, dependent: :destroy
 
   validates :name, presence: true
   validates :slug, uniqueness: true, format: { with: /\A[a-zA-Z0-9-]+\z/, message: "only allows letters, numbers, and hyphens" },

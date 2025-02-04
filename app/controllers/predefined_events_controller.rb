@@ -3,7 +3,7 @@ class PredefinedEventsController < AuthenticatedController
 
   # GET /predefined_events
   def index
-    @pagy, @predefined_events  = pagy authorize PredefinedEvent.enabled
+    @pagy, @predefined_events  = pagy authorize PredefinedEvent.all
   end
 
   # GET /predefined_events/1

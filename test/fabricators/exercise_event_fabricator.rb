@@ -3,14 +3,15 @@ Fabricator(:exercise_event) do
   exercise
   event nil
   triggered_at { Time.current }
-  status
-  relative_event_time { Faker::Number.number.within(range: 1..100000) }
+  relative_event_time { Faker::Number.within(range: 1..100000) }
 end
 
 Fabricator(:custom_exercise_event, from: :exercise_event) do
-  event { Fabricate(:custom_exercise_event) }
+  exercise { Fabricate(:custom_exercise) }
+  event { Fabricate(:custom_event) }
 end
 
 Fabricator(:predefined_exercise_event, from: :exercise_event) do
-  event { Fabricate(:predefined_exercise_event) }
+  exercise { Fabricate(:predefined_exercise) }
+  event { |attrs| attrs[:exercise].scenario.starting_scenario_event }
 end

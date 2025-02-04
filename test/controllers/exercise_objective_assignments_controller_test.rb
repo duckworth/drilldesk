@@ -2,6 +2,8 @@ require "test_helper"
 
 class ExerciseObjectiveAssignmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user, @team = user_with_team
+    sign_in @user
     @exercise_objective_assignment = Fabricate(:exercise_objective_assignment)
   end
 

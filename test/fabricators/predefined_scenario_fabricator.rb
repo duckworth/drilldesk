@@ -6,7 +6,8 @@ Fabricator(:predefined_scenario) do
 end
 
 Fabricator(:predefined_scenario_with_events, from: :predefined_scenario) do
-  after_create do |scenario|
-    Fabricate.times(3, :predefined_exercise_event, exercise: scenario.exercise)
+  after_build do |scenario|
+    Fabricate.times(3, :predefined_event, predefined_scenario: scenario)
+    scenario.starting_scenario_event = scenario.predefined_events.sample
   end
 end

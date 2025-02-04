@@ -1,9 +1,8 @@
 Fabricator(:custom_event) do
   team { Current.team || Fabricate(:team) }
   name { FakerHelper.generate_event_name }
-  description      "MyText"
-  custom_scenario  nil
-  name             "MyString"
-  trigger_keywords ""
+  description     { Faker::Lorem.sentence }
+  custom_scenario { |attrs| Fabricate(:custom_scenario, team: attrs[:team]) }
+  trigger_keywords { {} }
   sequence_order   1
 end

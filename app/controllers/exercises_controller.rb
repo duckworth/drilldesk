@@ -3,7 +3,7 @@ class ExercisesController < BaseTeamController
 
   # GET /exercises
   def index
-    @pagy, @exercises  = pagy Exercise.all
+    @pagy, @exercises = pagy Exercise.all
   end
 
   # GET /exercises/1
@@ -21,7 +21,13 @@ class ExercisesController < BaseTeamController
 
   # POST /exercises
   def create
-    @exercise = Exercise.new(exercise_params)
+    scenario = if exercise_params[:custom_scenario_id].present?
+                 CustomScenario.find_by(id: exercise_params[:custom_scenario_id])
+    else
+                 PredefinedScenario.find_by(id: exercise_params[:predefined_scenario_id])
+    end
+
+    @exercise = Exercise.new(exercise_params.merge(scenario: scenario).except(:custom_scenario_id, :predefined_scenario_id))
 
     if @exercise.save
       redirect_to @exercise, notice: "Exercise was successfully created."
@@ -46,13 +52,14 @@ class ExercisesController < BaseTeamController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_exercise
-      @exercise = Exercise.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def exercise_params
-      params.expect(exercise: [ :team_id, :name, :purpose, :status, :exercise_type_id, :custom_scenario_id, :predefined_scenario_id, :exercise_date, :context_data ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_exercise
+    @exercise = Exercise.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def exercise_params
+    params.expect(exercise: [ :name, :purpose, :status, :exercise_type_id, :custom_scenario_id, :predefined_scenario_id, :exercise_date, :context_data ])
+  end
 end

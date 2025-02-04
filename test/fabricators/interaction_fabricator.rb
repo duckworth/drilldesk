@@ -1,10 +1,10 @@
 Fabricator(:interaction) do
   team { Current.team || Fabricate(:team) }
-  exercise            nil
-  exercise_event      nil
-  interaction_type    "MyString"
-  user                nil
-  user_input          ""
-  ai_response         ""
-  response_confidence 1.5
+  exercise_event { Fabricate(:predefined_exercise_event) }
+  exercise { |attrs| attrs[:exercise_event].exercise }
+  interaction_type    Interaction.interaction_types.sample
+  user { Current.user || Fabricate(:user_with_team, team: attrs[:team]) }
+  user_input { Faker::Hacker.say_something_smart }
+  ai_response { Faker::Hacker.say_something_smart }
+  response_confidence { Faker::Number.decimal(l_digits: 2) }
 end

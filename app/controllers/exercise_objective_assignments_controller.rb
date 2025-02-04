@@ -53,6 +53,6 @@ class ExerciseObjectiveAssignmentsController < AuthenticatedController
 
     # Only allow a list of trusted parameters through.
     def exercise_objective_assignment_params
-      params.expect(exercise_objective_assignment: [ :team_id, :exercise_id, :exercise_objective_id, :priority ])
+      params.expect(exercise_objective_assignment: [ :exercise_id, :exercise_objective_id, :priority ])
     end
 end

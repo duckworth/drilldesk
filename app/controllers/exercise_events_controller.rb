@@ -21,7 +21,13 @@ class ExerciseEventsController < BaseTeamController
 
   # POST /exercise_events
   def create
-    @exercise_event = ExerciseEvent.new(exercise_event_params)
+    event = if exercise_event_params[:custom_event_id].present?
+              CustomEvent.find_by(id: exercise_event_params[:custom_event_id])
+    else
+              PredefinedEvent.find_by(id: exercise_event_params[:predefined_event_id])
+    end
+
+    @exercise_event = ExerciseEvent.new(exercise_event_params.merge(event: event).except(:custom_event_id, :predefined_event_id))
 
     if @exercise_event.save
       redirect_to @exercise_event, notice: "Exercise event was successfully created."
@@ -32,7 +38,7 @@ class ExerciseEventsController < BaseTeamController
 
   # PATCH/PUT /exercise_events/1
   def update
-    if @exercise_event.update(exercise_event_params)
+    if @exercise_event.update(exercise_event_params.except(:custom_event_id, :predefined_event_id))
       redirect_to @exercise_event, notice: "Exercise event was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
@@ -53,6 +59,6 @@ class ExerciseEventsController < BaseTeamController
 
     # Only allow a list of trusted parameters through.
     def exercise_event_params
-      params.expect(exercise_event: [ :team_id, :exercise_id, :predefined_event_id, :custom_event_id, :triggered_at, :status, :relative_event_time ])
+      params.expect(exercise_event: [ :exercise_id, :predefined_event_id, :custom_event_id, :triggered_at, :relative_event_time ])
     end
 end

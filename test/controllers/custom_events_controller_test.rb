@@ -2,7 +2,9 @@ require "test_helper"
 
 class CustomEventsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @custom_event = Fabricate(:custom_event)
+    @user, @team = user_with_team
+    sign_in @user
+    @custom_event = Fabricate(:custom_event, team: @team)
   end
 
   test "should get index" do
