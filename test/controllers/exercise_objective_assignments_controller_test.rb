@@ -22,7 +22,7 @@ class ExerciseObjectiveAssignmentsControllerTest < ActionDispatch::IntegrationTe
       post exercise_objective_assignments_url, params: { exercise_objective_assignment: { exercise_id: @exercise_objective_assignment.exercise_id, exercise_objective_id: @exercise_objective_assignment.exercise_objective_id, priority: @exercise_objective_assignment.priority, team_id: @exercise_objective_assignment.team_id } }
     end
 
-    assert_redirected_to exercise_objective_assignment_url(ExerciseObjectiveAssignment.last)
+    assert_redirected_to exercise_objective_assignment_url(ExerciseObjectiveAssignment.order(id: :desc).first)
   end
 
   test "should show exercise_objective_assignment" do

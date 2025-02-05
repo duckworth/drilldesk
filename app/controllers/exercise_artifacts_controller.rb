@@ -53,6 +53,6 @@ class ExerciseArtifactsController < BaseTeamController
 
     # Only allow a list of trusted parameters through.
     def exercise_artifact_params
-      params.expect(exercise_artifact: [ :team_id, :exercise_id, :artifact_type, :file ])
+      params.expect(exercise_artifact: [ :exercise_id, :artifact_type, :file ])
     end
 end

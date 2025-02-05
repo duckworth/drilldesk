@@ -61,3 +61,5 @@ gem "rubyzip"
 gem "show_for"
 gem "truemail"
 gem "uuid7"
+
+gem "active_storage_validations", "~> 2.0"

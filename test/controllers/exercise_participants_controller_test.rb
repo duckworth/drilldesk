@@ -2,6 +2,8 @@ require "test_helper"
 
 class ExerciseParticipantsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user, @team = user_with_team
+    sign_in @user
     @exercise_participant = Fabricate(:exercise_participant)
   end
 
@@ -34,7 +36,10 @@ class ExerciseParticipantsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update exercise_participant" do
-    patch exercise_participant_url(@exercise_participant), params: { exercise_participant: { exercise_id: @exercise_participant.exercise_id, name: @exercise_participant.name, role: @exercise_participant.role, team_id: @exercise_participant.team_id, user_id: @exercise_participant.user_id } }
+    patch exercise_participant_url(@exercise_participant), params: { exercise_participant: { exercise_id: @exercise_participant.exercise_id, name: @exercise_participant.name, role: @exercise_participant.role } }
+    assert_redirected_to exercise_participant_url(@exercise_participant)
+
+    patch exercise_participant_url(@exercise_participant), params: { exercise_participant: { exercise_id: @exercise_participant.exercise_id,  role: @exercise_participant.role,  user_id: @user.id } }
     assert_redirected_to exercise_participant_url(@exercise_participant)
   end
 

@@ -21,3 +21,9 @@ Fabricator(:user_with_team, from: :user) do
     Fabricate(:membership, user: user, team: team)
   end
 end
+
+Fabricator(:sysadmin_user, from: :user) do
+  after_build do |user|
+    user.sys_roles = [ User::Roles::SysRole::SYS_ADMIN ]
+  end
+end

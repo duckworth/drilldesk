@@ -1,6 +1,6 @@
 Fabricator(:exercise_artifact) do
   team { Current.team || Fabricate(:team) }
-  exercise      nil
-  artifact_type "MyString"
-  file          nil
+  exercise
+  artifact_type { ExerciseArtifact.artifact_types.keys.sample }
+  file { Rack::Test::UploadedFile.new(Rails.root.join("test", "fixtures", "files", "test.pdf"), "application/pdf") }
 end

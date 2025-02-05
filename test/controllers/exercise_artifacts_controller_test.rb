@@ -2,6 +2,8 @@ require "test_helper"
 
 class ExerciseArtifactsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user, @team = user_with_team
+    sign_in @user
     @exercise_artifact = Fabricate(:exercise_artifact)
   end
 
@@ -17,7 +19,8 @@ class ExerciseArtifactsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create exercise_artifact" do
     assert_difference("ExerciseArtifact.count") do
-      post exercise_artifacts_url, params: { exercise_artifact: { artifact_type: @exercise_artifact.artifact_type, exercise_id: @exercise_artifact.exercise_id, team_id: @exercise_artifact.team_id } }
+      post exercise_artifacts_url, params: { exercise_artifact: { artifact_type: @exercise_artifact.artifact_type, exercise_id: @exercise_artifact.exercise_id, file: fixture_file_upload("test.pdf", "application/pdf") } }
+      assert_not_equal 422, response.status, "Expected response not to be 422. Model errors: #{@controller.view_assigns['exercise_artifact'].errors.full_messages.join(', ')}"
     end
 
     assert_redirected_to exercise_artifact_url(ExerciseArtifact.last)

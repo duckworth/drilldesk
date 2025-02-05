@@ -3,6 +3,7 @@ Fabricator(:exercise) do
   name { "#{Faker::Hacker.verb.capitalize} #{Faker::Hipster.word.capitalize}" }
   purpose { "#{Faker::Hacker.ingverb} the #{Faker::Hacker.adjective} #{Faker::Hacker.noun}" }
   exercise_type
+  scenario { [ Fabricate(:custom_scenario), Fabricate(:predefined_scenario) ].sample }
 end
 
 Fabricator(:exercise_with_assigned_objectives, from: :exercise) do

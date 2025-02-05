@@ -2,6 +2,9 @@ require "test_helper"
 
 class PredefinedEventTransitionsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user, @team = user_with_team
+    @user.update(sys_roles: [ User::Roles::SysRole::SYS_ADMIN ])
+    sign_in @user
     @predefined_event_transition = Fabricate(:predefined_event_transition)
   end
 

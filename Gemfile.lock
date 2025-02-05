@@ -48,6 +48,12 @@ GEM
       rails-html-sanitizer (~> 1.6)
     active_model_validates_intersection_of (3.0.1)
       activemodel (>= 5.0.0)
+    active_storage_validations (2.0.2)
+      activejob (>= 6.1.4)
+      activemodel (>= 6.1.4)
+      activestorage (>= 6.1.4)
+      activesupport (>= 6.1.4)
+      marcel (>= 1.0.3)
     activeadmin (4.0.0.beta15)
       arbre (~> 2.0)
       csv
@@ -463,6 +469,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_model_validates_intersection_of
+  active_storage_validations (~> 2.0)
   activeadmin (>= 4.0.0.beta15)
   acts_as_tenant
   bootsnap

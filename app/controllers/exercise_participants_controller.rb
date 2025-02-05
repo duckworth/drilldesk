@@ -53,6 +53,6 @@ class ExerciseParticipantsController < BaseTeamController
 
     # Only allow a list of trusted parameters through.
     def exercise_participant_params
-      params.expect(exercise_participant: [ :team_id, :exercise_id, :name, :user_id, :role ])
+      params.expect(exercise_participant: [ :exercise_id, :name, :user_id, :role ])
     end
 end
