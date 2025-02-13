@@ -1,4 +1,4 @@
-require Rails.root.join("db/seeds/common/exercise_types.rb")
+require Rails.root.join("db/seeds/common/000200_exercise_types.rb")
 
 Fabricator(:exercise_type) do
   transient :exercise_data

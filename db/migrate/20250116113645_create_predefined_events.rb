@@ -4,7 +4,6 @@ class CreatePredefinedEvents < ActiveRecord::Migration[8.0]
       t.string :name
       t.text :description
       t.references :predefined_scenario, null: false, foreign_key: true, type: :uuid
-      t.jsonb :trigger_conditions
 
       t.timestamps
     end
