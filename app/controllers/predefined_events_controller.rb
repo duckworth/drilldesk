@@ -59,6 +59,6 @@ class PredefinedEventsController < AuthenticatedController
 
     # Only allow a list of trusted parameters through.
     def predefined_event_params
-      params.expect(predefined_event: [ :name, :description, :predefined_scenario_id, :trigger_conditions ])
+      params.expect(predefined_event: [ :name, :description, :predefined_scenario_id ])
     end
 end

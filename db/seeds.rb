@@ -39,21 +39,14 @@ if email.present?
   end
 end
 
-# load common seed files
-seed_files = Dir[Rails.root.join('db', 'seeds', 'common', '*.rb')]
+require_relative "seeds/seed_registry"
+# Load the seed files (alphabetically ordered)
+seed_files = Dir[Rails.root.join('db', 'seeds', 'common', '*.rb')].sort
+seed_files.each { |file| require file }
 
-seed_files.each do |file|
-  require file
-end
+# Call seed_all to run seeds in the order in which they registered themselves
+SeedData.seed_all
 
-# Call `seed` method on each module or class
-SeedData.constants.each do |constant|
-  klass = SeedData.const_get(constant)
-  if klass.respond_to?(:seed)
-    puts "Seeding: #{constant}"
-    klass.seed
-  end
-end
 
 # load environment-specific seed file
 environment_seed_file = Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb")

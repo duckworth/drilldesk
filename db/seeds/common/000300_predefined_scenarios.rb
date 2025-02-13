@@ -15,7 +15,7 @@ module SeedData
         # We'll update starting_scenario_event_id after we create the first event
       )
 
-      # 3) Create PredefinedEvents (no trigger_conditions; transitions handle logic).
+      # 3) Create PredefinedEvents
       event1 = PredefinedEvent.create!(
         predefined_scenario_id: apt_scenario.id,
         name: "Initial Compromise",
@@ -207,4 +207,5 @@ module SeedData
       puts "Predefined scenarios seeded successfully!"
     end
   end
+  SeedData.register(PredefinedScenarios)
 end

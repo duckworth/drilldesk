@@ -45,4 +45,5 @@ module SeedData
       puts "Exercise types seeded successfully!"
     end
   end
+  SeedData.register(ExerciseTypes)
 end

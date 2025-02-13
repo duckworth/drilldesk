@@ -20,7 +20,7 @@ class PredefinedEventsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create predefined_event" do
     assert_difference("PredefinedEvent.count") do
-      post predefined_events_url, params: { predefined_event: { description: @predefined_event.description, name: @predefined_event.name, predefined_scenario_id: @predefined_event.predefined_scenario_id, trigger_conditions: @predefined_event.trigger_conditions } }
+      post predefined_events_url, params: { predefined_event: { description: @predefined_event.description, name: @predefined_event.name, predefined_scenario_id: @predefined_event.predefined_scenario_id } }
     end
 
     assert_redirected_to predefined_event_url(PredefinedEvent.last)
@@ -37,7 +37,7 @@ class PredefinedEventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update predefined_event" do
-    patch predefined_event_url(@predefined_event), params: { predefined_event: { description: @predefined_event.description, name: @predefined_event.name, predefined_scenario_id: @predefined_event.predefined_scenario_id, trigger_conditions: @predefined_event.trigger_conditions } }
+    patch predefined_event_url(@predefined_event), params: { predefined_event: { description: @predefined_event.description, name: @predefined_event.name, predefined_scenario_id: @predefined_event.predefined_scenario_id } }
     assert_redirected_to predefined_event_url(@predefined_event)
   end
 

@@ -444,7 +444,6 @@ CREATE TABLE public.predefined_events (
     name character varying,
     description text,
     predefined_scenario_id uuid NOT NULL,
-    trigger_conditions jsonb,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );

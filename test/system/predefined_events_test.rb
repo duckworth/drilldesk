@@ -17,7 +17,6 @@ class PredefinedEventsTest < ApplicationSystemTestCase
     fill_in "Description", with: @predefined_event.description
     fill_in "Name", with: @predefined_event.name
     fill_in "Predefined scenario", with: @predefined_event.predefined_scenario_id
-    fill_in "Trigger conditions", with: @predefined_event.trigger_conditions
     click_on "Create Predefined event"
 
     assert_text "Predefined event was successfully created"
@@ -31,7 +30,6 @@ class PredefinedEventsTest < ApplicationSystemTestCase
     fill_in "Description", with: @predefined_event.description
     fill_in "Name", with: @predefined_event.name
     fill_in "Predefined scenario", with: @predefined_event.predefined_scenario_id
-    fill_in "Trigger conditions", with: @predefined_event.trigger_conditions
     click_on "Update Predefined event"
 
     assert_text "Predefined event was successfully updated"

@@ -53,4 +53,5 @@ module SeedData
       puts "Exercise objectives seeded successfully!"
     end
   end
+  SeedData.register(ExerciseObjectives)
 end

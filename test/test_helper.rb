@@ -4,6 +4,8 @@ require "rails/test_help"
 require "minitest/rails"
 require "faker"
 require_relative "support/faker_helper"
+
+require Rails.root.join("db/seeds/seed_registry.rb")
 Dir[Rails.root.join("test/support/**/*.rb")].each { |f| require f }
 
 module ActiveSupport
